@@ -6,22 +6,36 @@ using UnityEngine.InputSystem;
 
 public class Combat_Inputs : MonoBehaviour
 {
-    private Rigidbody2D playerBody;
-    private Vector2 moveInput;
-    //[SerializeField] private float moveSpeed = 1f;
+    //Rigidbody reference to allow changes to player character based on movement inputs
+    [SerializeField] protected Rigidbody2D playerBody;
 
-    private void Start(){
-        playerBody = GetComponent<Rigidbody2D>();
-    }
+    //private Vector2 moveInput;
+
+    //stores default movement speed
+    [SerializeField] private float moveSpeed = 5f;
+    [SerializeField] private float jumpForce = 3f;
+    private bool touchingGround;
+    public Transform groundContact;
+    public LayerMask whatIsGround;
+
+    //stores X-axis input value
+    private float inputX;
 
     private void FixedUpdate(){
-        //playerBody.MovePosition(playerBody.position + moveInput * moveSpeed * Time.fixedDeltaTime);
-        //^This code was borrowed from a tutorial on Top-down 2D movement, could/should get used in RPG movement script,
-        // and likely needs editing in order to apply correctly for Combat system
+        playerBody.velocity = new Vector2(inputX * moveSpeed, playerBody.velocity.y); //moves player based on value returned from Move method
+
+        touchingGround = Physics2D.OverlapCircle(groundContact.position, .2f, whatIsGround);
     }
 
-    public void Jump(){
-        Debug.Log("Jump");
+    //Handles movement inputs
+    public void Move(InputAction.CallbackContext context){
+        inputX = context.ReadValue<Vector2>().x; //sets X-axis movement value based on action value
+    }
+
+    public void Jump(InputAction.CallbackContext context){
+        if(touchingGround){
+            playerBody.velocity = new Vector2(playerBody.velocity.x, jumpForce);
+        }
     }
 
 }
