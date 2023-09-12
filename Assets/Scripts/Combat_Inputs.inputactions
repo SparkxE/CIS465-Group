@@ -789,9 +789,9 @@
                     "name": "PrimaryTouch",
                     "type": "PassThrough",
                     "id": "782c2bdc-6154-4fe4-a4d5-232f8afc49ec",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
-                    "interactions": "",
+                    "interactions": "Press",
                     "initialStateCheck": false
                 },
                 {
