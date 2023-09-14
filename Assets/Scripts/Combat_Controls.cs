@@ -35,5 +35,4 @@ public class Combat_Controls : MonoBehaviour
             playerBody.velocity = new Vector2(playerBody.velocity.x, jumpForce);
         }
     }
-
 }

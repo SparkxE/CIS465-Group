@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class SwipeDetection : MonoBehaviour
 {
@@ -21,6 +22,7 @@ public class SwipeDetection : MonoBehaviour
     //TouchManager reference to recognize touch events
     private TouchManager inputManager;
 
+    //Setup functions for activating/disabling swipe detection
     private void Awake() {
         inputManager = TouchManager.Instance;
     }
@@ -33,14 +35,16 @@ public class SwipeDetection : MonoBehaviour
         inputManager.OnEndTouch -= SwipeEnd;
     }
 
+    //Detects start of swipe and begins trail renderer
     private void SwipeStart(Vector2 position, float time){
         trail.SetActive(true);
-        trail.transform.position = new Vector3(position.x, position.y, 5);
+        trail.transform.position = new Vector3(position.x, position.y, swipeOffset);
         startPosition = position;
         startTime = time;
         coroutine = StartCoroutine(Trail());
     }
 
+    //Coroutine for TrailRenderer
     private IEnumerator Trail(){
         while(true){
             trail.transform.position = new Vector3(inputManager.PrimaryPosition().x, inputManager.PrimaryPosition().y, swipeOffset);
@@ -48,6 +52,7 @@ public class SwipeDetection : MonoBehaviour
         }
     }
 
+    //Detects end of swipe and ends trail renderer
     private void SwipeEnd(Vector2 position, float time){
         trail.SetActive(false);
         StopCoroutine(coroutine);
@@ -56,6 +61,7 @@ public class SwipeDetection : MonoBehaviour
         DetectSwipe();
     }
 
+    //Detects swipe direction and draws debug line between start & end points
     private void DetectSwipe(){
         if(Vector3.Distance(startPosition, endPosition) >= minimumDistance &&
             (endTime-startTime)<= maximumTime){
@@ -66,7 +72,9 @@ public class SwipeDetection : MonoBehaviour
             }
     }
 
+    //Logging for recognizing swipe directions
     private void SwipeDirection(Vector2 direction){
+        //InputAction.CallbackContext context;
         if(Vector2.Dot(Vector2.up, direction) > directionThreshold){
             Debug.Log("Swipe Up");
         }
