@@ -27,4 +27,14 @@ public class PlayerBehaviour : MonoBehaviour
     {
         moveInput = inputValue.Get<Vector2>();
     }
+
+    public void SetSpeed(float inputSpeed)
+    {
+        speed = inputSpeed;
+    }
+
+    public float GetSpeed()
+    {
+        return speed;
+    }
 }
