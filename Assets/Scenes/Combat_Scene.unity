@@ -169,6 +169,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6cef4379a388207459008145b617a3f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mainCamera: {fileID: 519420031}
 --- !u!4 &65969073
 Transform:
   m_ObjectHideFlags: 0
@@ -787,7 +788,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9d677f1681015749b15c436eec6d880, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_MovementRange: 100
+  m_MovementRange: 50
   m_DynamicOriginRange: 100
   m_ControlPath: <Gamepad>/leftStick
   m_Behaviour: 0
@@ -823,7 +824,7 @@ GameObject:
   - component: {fileID: 1927111613}
   - component: {fileID: 1927111612}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: ControlStick
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1214,6 +1215,22 @@ PrefabInstance:
     - target: {fileID: 3747370807220987238, guid: 1c59366b352f6b7438db6bdfe2e5905c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5386204523904082747, guid: 1c59366b352f6b7438db6bdfe2e5905c, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 519420031}
+    - target: {fileID: 5386204523904082747, guid: 1c59366b352f6b7438db6bdfe2e5905c, type: 3}
+      propertyPath: m_DeviceLostEvent.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5386204523904082747, guid: 1c59366b352f6b7438db6bdfe2e5905c, type: 3}
+      propertyPath: m_DeviceLostEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5386204523904082747, guid: 1c59366b352f6b7438db6bdfe2e5905c, type: 3}
+      propertyPath: m_DeviceLostEvent.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
