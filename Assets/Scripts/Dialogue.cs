@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using TMPro;
+using Unity.VisualScripting;
 
 public class Dialogue : MonoBehaviour
 {
@@ -17,9 +18,11 @@ public class Dialogue : MonoBehaviour
     protected float playerSpeed;
     private int index;
 
+
     private void Awake() {
         inputManager = gameObject.AddComponent<TouchManager>();
     }
+    
     // Start is called before the first frame update
     private void Start()
     {
@@ -30,17 +33,29 @@ public class Dialogue : MonoBehaviour
         playerSpeed = player.GetComponent<PlayerBehaviour>().GetSpeed(); // save current speed for later
 
         textComponent.text = string.Empty;
-        // StartDialogue();
+        // StartDialogue(); //should probably delete this line if it's not being used
     }
 
-    // Update is called once per frame
-    private void Update()
-    {
-        if (Mouse.current.leftButton.wasPressedThisFrame) // change for global input (to work for tap)
-        {
+    private void OnEnable() {
+        inputManager.OnStartTouch += TapDialogue;
+    }
+    private void OnDisable() {
+        inputManager.OnStartTouch -= TapDialogue;
+    }
+    private void TapDialogue(Vector2 position, float time){ //only the delegate needs these parameters
+        if(canvas.activeInHierarchy == true){
             OnInteract();
         }
     }
+
+    // // Update is called once per frame
+    // private void Update()
+    // {
+    //     if (Mouse.current.leftButton.wasPressedThisFrame) // change for global input (to work for tap)
+    //     {
+    //         OnInteract();
+    //     }
+    // }    //this function shouldn't be necessary (at least for now) since it's only used for text box progress
 
     private void OnInteract()
     {
