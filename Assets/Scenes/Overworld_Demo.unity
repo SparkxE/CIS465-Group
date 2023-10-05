@@ -177,7 +177,7 @@ PrefabInstance:
       objectReference: {fileID: 537784736}
     - target: {fileID: 5927908017384450977, guid: f9966a495794bf341842c2495b5575d2, type: 3}
       propertyPath: m_Name
-      value: TouchTest
+      value: Managers
       objectReference: {fileID: 0}
     - target: {fileID: 5927908017384450977, guid: f9966a495794bf341842c2495b5575d2, type: 3}
       propertyPath: m_IsActive
@@ -201,7 +201,7 @@ GameObject:
   - component: {fileID: 499994803}
   - component: {fileID: 499994802}
   - component: {fileID: 499994805}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Moat
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1028,7 +1028,7 @@ Transform:
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -3}
+  m_LocalPosition: {x: 0, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -1063,7 +1063,7 @@ GameObject:
   - component: {fileID: 585031043}
   - component: {fileID: 585031045}
   - component: {fileID: 585031044}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Plains
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2654,7 +2654,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4567466958079027604, guid: 7ff8b2981ed811044bd03fd433233645, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -15
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4567466958079027604, guid: 7ff8b2981ed811044bd03fd433233645, type: 3}
       propertyPath: m_LocalRotation.w
@@ -3182,7 +3182,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1041677101}
   - component: {fileID: 1041677100}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Grid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3210,7 +3210,7 @@ Transform:
   m_GameObject: {fileID: 1041677099}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3313,7 +3313,7 @@ GameObject:
   - component: {fileID: 1102863726}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3379,7 +3379,7 @@ Transform:
   m_GameObject: {fileID: 1102863718}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.7, y: 0.09, z: 0.1}
+  m_LocalPosition: {x: -2.7, y: 0.09, z: 0}
   m_LocalScale: {x: 0.6625, y: 0.6625, z: 0.6625}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -3520,7 +3520,7 @@ MonoBehaviour:
     m_ActionName: Touch/PrimaryPosition[/Simulated Touchscreen/primaryTouch/position]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
-  m_DefaultActionMap: Overworld
+  m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 519420031}
 --- !u!114 &1102863723

@@ -4,8 +4,12 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
+[DefaultExecutionOrder(-1)]
 public class TouchManager : MonoBehaviour
 {
+
+
+
     #region Events
         public delegate void StartTouch(Vector2 position, float time);
         public event StartTouch OnStartTouch;
@@ -16,13 +20,13 @@ public class TouchManager : MonoBehaviour
 
     //Reference to Combat_Inputs ActionMap object for swipe controls
     private Combat_Inputs combatInputs;
-    private Input rpgInput;
+    private RPGInput rpgInput;
     private Camera mainCamera;
 
     //Awake and Enable/Disable functions for Touchscreen Inputs
     private void Awake() {
         combatInputs = new Combat_Inputs();
-        rpgInput = new Input();
+        rpgInput = new RPGInput();
         mainCamera = Camera.main;
     }
 
@@ -41,31 +45,31 @@ public class TouchManager : MonoBehaviour
         else if(SceneManager.GetActiveScene().name == "Combat_Scene"){
             combatInputs.Disable();
         }
-        Destroy(this);
+        //Destroy(this);
     }
 
     //Runs on program start
     private void Start() {
         if(SceneManager.GetActiveScene().name == "Overworld_Demo"){
-            rpgInput.Touch.PrimaryTouch.started += ctx => StartTouchPrimary(ctx); //format of ActionMap reference is "actionInput.ActionMap.Action.state"
-            rpgInput.Touch.PrimaryTouch.canceled += ctx => EndTouchPrimary(ctx);
+            rpgInput.Touch.PrimaryContact.started += ctx => StartTouchPrimary(ctx); //format of ActionMap reference is "actionInput.ActionMap.Action.state"
+            rpgInput.Touch.PrimaryContact.canceled += ctx => EndTouchPrimary(ctx);
         }
         else if(SceneManager.GetActiveScene().name == "Combat_Scene"){
-            combatInputs.Touch.PrimaryTouch.started += ctx => StartTouchPrimary(ctx); //format of ActionMap reference is "actionInput.ActionMap.Action.state"
-            combatInputs.Touch.PrimaryTouch.canceled += ctx => EndTouchPrimary(ctx);
+            combatInputs.Touch.PrimaryContact.started += ctx => StartTouchPrimary(ctx); //format of ActionMap reference is "actionInput.ActionMap.Action.state"
+            combatInputs.Touch.PrimaryContact.canceled += ctx => EndTouchPrimary(ctx);
         }
     }
 
-    private void OnDestroy(){
-        if(SceneManager.GetActiveScene().name == "Overworld_Demo"){
-            rpgInput.Touch.PrimaryTouch.started -= ctx => StartTouchPrimary(ctx);
-            rpgInput.Touch.PrimaryTouch.canceled -= ctx => EndTouchPrimary(ctx);
-        }
-        else if(SceneManager.GetActiveScene().name == "Combat_Scene"){
-            combatInputs.Touch.PrimaryTouch.started -= ctx => StartTouchPrimary(ctx);
-            combatInputs.Touch.PrimaryTouch.canceled -= ctx => EndTouchPrimary(ctx);
-        }
-    }
+    // private void OnDestroy(){
+    //     if(SceneManager.GetActiveScene().name == "Overworld_Demo"){
+    //         rpgInput.Touch.PrimaryContact.started -= ctx => StartTouchPrimary(ctx);
+    //         rpgInput.Touch.PrimaryContact.canceled -= ctx => EndTouchPrimary(ctx);
+    //     }
+    //     else if(SceneManager.GetActiveScene().name == "Combat_Scene"){
+    //         combatInputs.Touch.PrimaryContact.started -= ctx => StartTouchPrimary(ctx);
+    //         combatInputs.Touch.PrimaryContact.canceled -= ctx => EndTouchPrimary(ctx);
+    //     }
+    // }
 
     //Detecting when Touch Input Starts
     private void StartTouchPrimary(InputAction.CallbackContext context){
@@ -90,13 +94,14 @@ public class TouchManager : MonoBehaviour
             if (OnEndTouch != null) OnEndTouch(Utils.ScreenToWorld(mainCamera, combatInputs.Touch.PrimaryPosition.ReadValue<Vector2>()), (float)context.time);
         }
     }
+
     //Returns current Touch position for trail rendering
     public Vector2 PrimaryPosition(){
         //double check if this is proper or if this can be done better
         Vector2 touchPos = new Vector2(0,0);
 
         if(SceneManager.GetActiveScene().name == "Overworld_Demo"){
-            touchPos = Utils.ScreenToWorld(mainCamera, combatInputs.Touch.PrimaryPosition.ReadValue<Vector2>());
+            touchPos = Utils.ScreenToWorld(mainCamera, rpgInput.Touch.PrimaryPosition.ReadValue<Vector2>());
         }
         else if(SceneManager.GetActiveScene().name == "Combat_Scene"){
             touchPos = Utils.ScreenToWorld(mainCamera, combatInputs.Touch.PrimaryPosition.ReadValue<Vector2>());
