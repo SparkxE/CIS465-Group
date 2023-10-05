@@ -208,7 +208,7 @@ PrefabInstance:
       objectReference: {fileID: 830826313}
     - target: {fileID: 5927908017384450977, guid: f9966a495794bf341842c2495b5575d2, type: 3}
       propertyPath: m_Name
-      value: TouchTest
+      value: Managers
       objectReference: {fileID: 0}
     - target: {fileID: 5927908017384450977, guid: f9966a495794bf341842c2495b5575d2, type: 3}
       propertyPath: m_IsActive
@@ -1096,6 +1096,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2346632752899906092, guid: 1c59366b352f6b7438db6bdfe2e5905c, type: 3}
+      propertyPath: m_Constraints
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 2734084685464280983, guid: 1c59366b352f6b7438db6bdfe2e5905c, type: 3}
       propertyPath: m_Name
       value: Player

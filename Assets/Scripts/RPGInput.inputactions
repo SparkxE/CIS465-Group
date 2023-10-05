@@ -1,8 +1,8 @@
 {
-    "name": "Input",
+    "name": "RPGInput",
     "maps": [
         {
-            "name": "Overworld",
+            "name": "Player",
             "id": "bccbc358-0fa7-4601-a9de-ae49e9e6ebe4",
             "actions": [
                 {
@@ -788,10 +788,10 @@
             "id": "f6cfd0b3-4aa2-4476-9f83-246e8f142e31",
             "actions": [
                 {
-                    "name": "PrimaryTouch",
+                    "name": "PrimaryContact",
                     "type": "PassThrough",
                     "id": "15400723-be9e-4990-a38f-a957867927d6",
-                    "expectedControlType": "",
+                    "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "Press",
                     "initialStateCheck": false
@@ -814,7 +814,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "PrimaryTouch",
+                    "action": "PrimaryContact",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
