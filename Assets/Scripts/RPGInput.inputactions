@@ -1,5 +1,5 @@
 {
-    "name": "Input",
+    "name": "RPGInput",
     "maps": [
         {
             "name": "Player",
@@ -40,7 +40,7 @@
                     "path": "<Gamepad>/leftStick",
                     "interactions": "",
                     "processors": "",
-                    "groups": ";Gamepad",
+                    "groups": "Gamepad",
                     "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -168,11 +168,11 @@
                 },
                 {
                     "name": "",
-                    "id": "b2951439-954f-4302-a665-16d129df70bf",
-                    "path": "<Touchscreen>/position",
+                    "id": "2be56f72-4721-4b1a-ba8d-ef8f711b5f95",
+                    "path": "<Gamepad>/dpad",
                     "interactions": "",
-                    "processors": "NormalizeVector2",
-                    "groups": "Touch",
+                    "processors": "",
+                    "groups": "Gamepad",
                     "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -778,6 +778,54 @@
                     "processors": "",
                     "groups": "XR",
                     "action": "TrackedDeviceOrientation",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "Touch",
+            "id": "f6cfd0b3-4aa2-4476-9f83-246e8f142e31",
+            "actions": [
+                {
+                    "name": "PrimaryContact",
+                    "type": "PassThrough",
+                    "id": "15400723-be9e-4990-a38f-a957867927d6",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Press",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "PrimaryPosition",
+                    "type": "PassThrough",
+                    "id": "ec512309-74a4-4e1b-8401-64fe4a3c90b2",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "8ea2d5a3-40a8-4825-82c3-522be2068b12",
+                    "path": "<Touchscreen>/primaryTouch/press",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "PrimaryContact",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8e573bac-fcf0-4301-9265-c044a6d56c8b",
+                    "path": "<Touchscreen>/primaryTouch/position",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "PrimaryPosition",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

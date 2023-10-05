@@ -6,10 +6,10 @@ using UnityEngine.InputSystem;
 public class PlayerBehaviour : MonoBehaviour
 {
     [SerializeField] 
-    [Range(1, 10)]
-    protected float speed = 5;
-    [SerializeField] protected Rigidbody2D rb;
-    [SerializeField] protected Vector2 moveInput;
+    [Range(10, 20)]
+    private float speed = 15;
+    [SerializeField] private Rigidbody2D rb;
+    private Vector2 moveInput;
 
     // Start is called before the first frame update
     private void Start()
@@ -20,21 +20,18 @@ public class PlayerBehaviour : MonoBehaviour
     // Update is called once per frame
     private void FixedUpdate()
     {
-        rb.velocity = moveInput * speed;
+        rb.velocity = new Vector2(moveInput.x * speed, moveInput.y * speed);
     }
     
-    private void OnMove(InputValue inputValue)
+    public void Move(InputAction.CallbackContext inputValue)
     {
-        moveInput = inputValue.Get<Vector2>();
+        moveInput = inputValue.ReadValue<Vector2>().normalized;
     }
 
-    public void SetSpeed(float inputSpeed)
-    {
-        speed = inputSpeed;
+    public void SetSpeed(float newSpeed){
+        speed = newSpeed;
     }
-
-    public float GetSpeed()
-    {
+    public float GetSpeed(){
         return speed;
     }
 }

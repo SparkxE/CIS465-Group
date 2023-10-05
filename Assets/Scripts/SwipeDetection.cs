@@ -5,10 +5,13 @@ using UnityEngine.InputSystem;
 
 public class SwipeDetection : MonoBehaviour
 {
+
+
+
     //Variables for determining swipe direction and timing
     [SerializeField] private float minimumDistance = 0.2f;
-    [SerializeField] private float maximumTime = 1f; 
-    [SerializeField, Range(0f, 1f)] private float directionThreshold = 0.9f;
+    [SerializeField] private float maximumTime = 1f;
+    [SerializeField, Range(0f, 1f)] private float directionThreshold = 0.7f;
     private Vector2 startPosition;
     private float startTime;
     private Vector2 endPosition;
@@ -17,20 +20,20 @@ public class SwipeDetection : MonoBehaviour
     //GameObject & Coroutine for rendering Swipe Trail
     [SerializeField] private GameObject trail;
     private Coroutine coroutine;
-    private float swipeOffset = -5;
+    private float swipeLayer = -5;
 
-    //TouchManager reference to recognize touch events
+    // //TouchManager reference to recognize touch events
     private TouchManager inputManager;
 
     //Setup functions for activating/disabling swipe detection
     private void Awake() {
-        inputManager = TouchManager.Instance;
+        inputManager = gameObject.AddComponent<TouchManager>();
     }
     private void OnEnable() {
         inputManager.OnStartTouch += SwipeStart;
         inputManager.OnEndTouch += SwipeEnd;
     }
-    private void OnDestroy() {
+    private void OnDisable() {
         inputManager.OnStartTouch -= SwipeStart;
         inputManager.OnEndTouch -= SwipeEnd;
     }
@@ -38,7 +41,7 @@ public class SwipeDetection : MonoBehaviour
     //Detects start of swipe and begins trail renderer
     private void SwipeStart(Vector2 position, float time){
         trail.SetActive(true);
-        trail.transform.position = new Vector3(position.x, position.y, swipeOffset);
+        trail.transform.position = position;
         startPosition = position;
         startTime = time;
         coroutine = StartCoroutine(Trail());
@@ -47,7 +50,7 @@ public class SwipeDetection : MonoBehaviour
     //Coroutine for TrailRenderer
     private IEnumerator Trail(){
         while(true){
-            trail.transform.position = new Vector3(inputManager.PrimaryPosition().x, inputManager.PrimaryPosition().y, swipeOffset);
+            trail.transform.position = new Vector3(inputManager.PrimaryPosition().x, inputManager.PrimaryPosition().y, swipeLayer);
             yield return null;
         }
     }

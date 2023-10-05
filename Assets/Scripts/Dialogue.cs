@@ -13,8 +13,13 @@ public class Dialogue : MonoBehaviour
     [SerializeField] protected float textSpeed;
     protected GameObject canvas;
     protected GameObject player;
+    private TouchManager inputManager;
     protected float playerSpeed;
     private int index;
+
+    private void Awake() {
+        inputManager = gameObject.AddComponent<TouchManager>();
+    }
     // Start is called before the first frame update
     private void Start()
     {

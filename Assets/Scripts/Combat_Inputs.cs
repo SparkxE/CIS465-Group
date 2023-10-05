@@ -62,7 +62,7 @@ public partial class @Combat_Inputs: IInputActionCollection2, IDisposable
                     ""path"": ""<Gamepad>/leftStick"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Gamepad"",
+                    ""groups"": ""Gamepad;Touch"",
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -250,10 +250,10 @@ public partial class @Combat_Inputs: IInputActionCollection2, IDisposable
             ""id"": ""0cdf015e-0564-465a-959a-01597170b7f1"",
             ""actions"": [
                 {
-                    ""name"": ""PrimaryTouch"",
+                    ""name"": ""PrimaryContact"",
                     ""type"": ""PassThrough"",
                     ""id"": ""782c2bdc-6154-4fe4-a4d5-232f8afc49ec"",
-                    ""expectedControlType"": """",
+                    ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": ""Press"",
                     ""initialStateCheck"": false
@@ -276,7 +276,7 @@ public partial class @Combat_Inputs: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""PrimaryTouch"",
+                    ""action"": ""PrimaryContact"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -364,7 +364,7 @@ public partial class @Combat_Inputs: IInputActionCollection2, IDisposable
         m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
         // Touch
         m_Touch = asset.FindActionMap("Touch", throwIfNotFound: true);
-        m_Touch_PrimaryTouch = m_Touch.FindAction("PrimaryTouch", throwIfNotFound: true);
+        m_Touch_PrimaryContact = m_Touch.FindAction("PrimaryContact", throwIfNotFound: true);
         m_Touch_PrimaryPosition = m_Touch.FindAction("PrimaryPosition", throwIfNotFound: true);
     }
 
@@ -489,13 +489,13 @@ public partial class @Combat_Inputs: IInputActionCollection2, IDisposable
     // Touch
     private readonly InputActionMap m_Touch;
     private List<ITouchActions> m_TouchActionsCallbackInterfaces = new List<ITouchActions>();
-    private readonly InputAction m_Touch_PrimaryTouch;
+    private readonly InputAction m_Touch_PrimaryContact;
     private readonly InputAction m_Touch_PrimaryPosition;
     public struct TouchActions
     {
         private @Combat_Inputs m_Wrapper;
         public TouchActions(@Combat_Inputs wrapper) { m_Wrapper = wrapper; }
-        public InputAction @PrimaryTouch => m_Wrapper.m_Touch_PrimaryTouch;
+        public InputAction @PrimaryContact => m_Wrapper.m_Touch_PrimaryContact;
         public InputAction @PrimaryPosition => m_Wrapper.m_Touch_PrimaryPosition;
         public InputActionMap Get() { return m_Wrapper.m_Touch; }
         public void Enable() { Get().Enable(); }
@@ -506,9 +506,9 @@ public partial class @Combat_Inputs: IInputActionCollection2, IDisposable
         {
             if (instance == null || m_Wrapper.m_TouchActionsCallbackInterfaces.Contains(instance)) return;
             m_Wrapper.m_TouchActionsCallbackInterfaces.Add(instance);
-            @PrimaryTouch.started += instance.OnPrimaryTouch;
-            @PrimaryTouch.performed += instance.OnPrimaryTouch;
-            @PrimaryTouch.canceled += instance.OnPrimaryTouch;
+            @PrimaryContact.started += instance.OnPrimaryContact;
+            @PrimaryContact.performed += instance.OnPrimaryContact;
+            @PrimaryContact.canceled += instance.OnPrimaryContact;
             @PrimaryPosition.started += instance.OnPrimaryPosition;
             @PrimaryPosition.performed += instance.OnPrimaryPosition;
             @PrimaryPosition.canceled += instance.OnPrimaryPosition;
@@ -516,9 +516,9 @@ public partial class @Combat_Inputs: IInputActionCollection2, IDisposable
 
         private void UnregisterCallbacks(ITouchActions instance)
         {
-            @PrimaryTouch.started -= instance.OnPrimaryTouch;
-            @PrimaryTouch.performed -= instance.OnPrimaryTouch;
-            @PrimaryTouch.canceled -= instance.OnPrimaryTouch;
+            @PrimaryContact.started -= instance.OnPrimaryContact;
+            @PrimaryContact.performed -= instance.OnPrimaryContact;
+            @PrimaryContact.canceled -= instance.OnPrimaryContact;
             @PrimaryPosition.started -= instance.OnPrimaryPosition;
             @PrimaryPosition.performed -= instance.OnPrimaryPosition;
             @PrimaryPosition.canceled -= instance.OnPrimaryPosition;
@@ -592,7 +592,7 @@ public partial class @Combat_Inputs: IInputActionCollection2, IDisposable
     }
     public interface ITouchActions
     {
-        void OnPrimaryTouch(InputAction.CallbackContext context);
+        void OnPrimaryContact(InputAction.CallbackContext context);
         void OnPrimaryPosition(InputAction.CallbackContext context);
     }
 }
