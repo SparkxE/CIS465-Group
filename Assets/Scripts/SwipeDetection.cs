@@ -7,7 +7,7 @@ public class SwipeDetection : MonoBehaviour
 {
     //Variables for determining swipe direction and timing
     [SerializeField] private float minimumDistance = 0.2f;
-    [SerializeField] private float maximumTime = 1f; 
+    [SerializeField] private float maximumTime = 1f;
     [SerializeField, Range(0f, 1f)] private float directionThreshold = 0.9f;
     private Vector2 startPosition;
     private float startTime;
@@ -24,7 +24,7 @@ public class SwipeDetection : MonoBehaviour
 
     //Setup functions for activating/disabling swipe detection
     private void Awake() {
-        inputManager = TouchManager.Instance;
+        inputManager = gameObject.AddComponent<TouchManager>();
     }
     private void OnEnable() {
         inputManager.OnStartTouch += SwipeStart;
@@ -65,7 +65,7 @@ public class SwipeDetection : MonoBehaviour
     private void DetectSwipe(){
         if(Vector3.Distance(startPosition, endPosition) >= minimumDistance &&
             (endTime-startTime)<= maximumTime){
-                Debug.DrawLine(startPosition, endPosition, Color.red, 5f);
+                Debug.DrawLine(startPosition, endPosition, Color.red, swipeOffset);
                 Vector3 direction = endPosition - startPosition;
                 Vector2 direction2D = new Vector2(direction.x, direction.y).normalized;
                 SwipeDirection(direction2D);
