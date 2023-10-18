@@ -9,6 +9,20 @@ public class EnemyLoader : MonoBehaviour
 
     private void Awake() {
         enemyName = sceneInfo.enemyType;
-        GameObject.FindGameObjectWithTag(enemyName);
+        switch (enemyName)
+        {
+            case "BlueSlime":
+                GameObject.FindGameObjectWithTag("RedSlime").SetActive(false);
+                GameObject.FindGameObjectWithTag("GreenSlime").SetActive(false);
+                break;
+            case "RedSlime": 
+                GameObject.FindGameObjectWithTag("GreenSlime").SetActive(false);
+                GameObject.FindGameObjectWithTag("BlueSlime").SetActive(false);
+                break;
+            case "GreenSlime":
+                GameObject.FindGameObjectWithTag("BlueSlime").SetActive(false);
+                GameObject.FindGameObjectWithTag("RedSlime").SetActive(false);
+                break;
+        }
     }
 }
