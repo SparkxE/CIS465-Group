@@ -8,7 +8,7 @@ public class SwipeDetection : MonoBehaviour
     //Variables for determining swipe direction and timing
     [SerializeField] private float minimumDistance = 0.2f;
     [SerializeField] private float maximumTime = 1f;
-    [SerializeField, Range(0f, 1f)] private float directionThreshold = 0.7f;
+    // [SerializeField, Range(0f, 1f)] private float directionThreshold = 0.7f;
     private Vector2 startPosition;
     private float startTime;
     private Vector2 endPosition;

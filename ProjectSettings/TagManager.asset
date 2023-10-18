@@ -3,7 +3,10 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - BlueSlime
+  - RedSlime
+  - GreenSlime
   layers:
   - Default
   - TransparentFX
@@ -38,6 +41,9 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: TrailRenderer
+    uniqueID: 774652299
+    locked: 0
   - name: Background
     uniqueID: 3358412435
     locked: 0
