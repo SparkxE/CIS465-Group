@@ -8,15 +8,19 @@ public class EnemyHealth : MonoBehaviour
     [SerializeField] private float maxHealth = 3f;
     [SerializeField] private SceneInfo sceneInfo;
     private float currentHealth;
+    private Animator animator;
     private void Awake() {
-        currentHealth = maxHealth;   
+        currentHealth = maxHealth;
+        animator = GetComponent<Animator>();
     }
 
     public void Damage(float damageAmount){
         currentHealth -= damageAmount;
+        animator.SetTrigger("Damage");
         if(currentHealth <= 0){
             //die
-            Die();
+            animator.SetTrigger("Death");
+            Invoke("Die", 0.75f);
         }
     }
 

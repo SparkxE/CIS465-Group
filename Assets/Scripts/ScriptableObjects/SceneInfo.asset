@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: SceneInfo
   m_EditorClassIdentifier: 
   enemyType: BlueSlime
-  playerPosition: {fileID: 0}
-  lastTouched: {fileID: 0}
+  playerPosition: {x: 2.8539376, y: -1.9175922, z: 0}
+  lastTouched: {x: 0, y: 0, z: 0}
   isDead: []
