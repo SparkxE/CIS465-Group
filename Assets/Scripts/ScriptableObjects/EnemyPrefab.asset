@@ -12,4 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93ab8b60205589943809b8bed2e9677c, type: 3}
   m_Name: EnemyPrefab
   m_EditorClassIdentifier: 
-  prefabName: 
+  enemyType: BlueSlime
+  playerPosition: {fileID: 0}
+  lastTouched: {fileID: 0}
+  isDead: []

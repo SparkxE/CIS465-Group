@@ -3533,6 +3533,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 8.1
   rb: {fileID: 1102863721}
+  sceneInfo: {fileID: 11400000, guid: 83ac91f4b21a34f4692cf4ded80d0fcf, type: 2}
 --- !u!95 &1102863725
 Animator:
   serializedVersion: 5
@@ -3543,7 +3544,7 @@ Animator:
   m_GameObject: {fileID: 1102863718}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 8cfde05e569dfc143900baef834f72b5, type: 2}
+  m_Controller: {fileID: 9100000, guid: 312496b25d842af4a938e96c7d5aaee0, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -3954,7 +3955,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7060331821208060588, guid: c96bb3f176e223a47a1ef2f2562d1d11, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.1
+      value: -3.63
       objectReference: {fileID: 0}
     - target: {fileID: 7060331821208060588, guid: c96bb3f176e223a47a1ef2f2562d1d11, type: 3}
       propertyPath: m_LocalPosition.z
@@ -4003,7 +4004,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4460128929468283365, guid: 3047f11644be9264289a6dc903eb553b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.38
+      value: 3.33
       objectReference: {fileID: 0}
     - target: {fileID: 4460128929468283365, guid: 3047f11644be9264289a6dc903eb553b, type: 3}
       propertyPath: m_LocalPosition.y
