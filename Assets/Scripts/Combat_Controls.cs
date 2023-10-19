@@ -26,6 +26,7 @@ public class Combat_Controls : MonoBehaviour
     [SerializeField] private LayerMask attackLayer;
     [SerializeField] private float attackDamage = 1f;
     private Touch activeTouch;
+    private bool attackStarted;
     private WaitForSeconds timeToTap;
     private float tapLimit = 0.2f;
 
@@ -48,11 +49,13 @@ public class Combat_Controls : MonoBehaviour
         if(Touch.activeFingers.Count == 1){
             activeTouch = Touch.activeFingers[0].currentTouch;
 
-            if(activeTouch.phase == UnityEngine.InputSystem.TouchPhase.Began){
+            if(activeTouch.phase == UnityEngine.InputSystem.TouchPhase.Began && attackStarted == false){
                 StartCoroutine(DelayTouchStart());
+                attackStarted = true;
             }
             if(activeTouch.phase == UnityEngine.InputSystem.TouchPhase.Ended || activeTouch.phase == UnityEngine.InputSystem.TouchPhase.Canceled){
                 StopCoroutine(DelayTouchStart());
+                attackStarted = false;
             }
         }
     }
@@ -62,6 +65,7 @@ public class Combat_Controls : MonoBehaviour
         if(activeTouch.phase != UnityEngine.InputSystem.TouchPhase.Moved){
             NeutralAttack();
         }
+        yield break;
     }
 
     //Handles movement inputs
