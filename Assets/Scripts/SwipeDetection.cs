@@ -19,12 +19,12 @@ public class SwipeDetection : MonoBehaviour
     private Coroutine coroutine;
     private float swipeLayer = -5;
 
-    // //TouchManager reference to recognize touch events
+    //TouchManager reference to recognize touch events
     private TouchManager inputManager;
 
     //Setup functions for activating/disabling swipe detection
     private void Awake() {
-        inputManager = gameObject.AddComponent<TouchManager>();
+        inputManager = gameObject.GetComponent<TouchManager>();
     }
     private void OnEnable() {
         inputManager.OnStartTouch += SwipeStart;
@@ -72,7 +72,7 @@ public class SwipeDetection : MonoBehaviour
             }
     }
 
-    //Logging for recognizing swipe directions
+    // //Logging for recognizing swipe directions
     // private void SwipeDirection(Vector2 direction){
     //     //InputAction.CallbackContext context;
     //     if(Vector2.Dot(Vector2.up, direction) > directionThreshold){

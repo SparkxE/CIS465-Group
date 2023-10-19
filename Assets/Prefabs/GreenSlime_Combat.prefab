@@ -11,9 +11,10 @@ GameObject:
   - component: {fileID: 5087976438630877719}
   - component: {fileID: 3817702599804655819}
   - component: {fileID: 3582504991760310108}
-  m_Layer: 0
+  - component: {fileID: 5236870523438143355}
+  m_Layer: 7
   m_Name: GreenSlime_Combat
-  m_TagString: Untagged
+  m_TagString: GreenSlime
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -107,6 +108,20 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 3, y: 2}
   m_EdgeRadius: 0
+--- !u!114 &5236870523438143355
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2414472920541819678}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0edbee0305725ce4f9000b7071415858, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 3
+  sceneInfo: {fileID: 11400000, guid: 83ac91f4b21a34f4692cf4ded80d0fcf, type: 2}
 --- !u!1 &8240454361247060052
 GameObject:
   m_ObjectHideFlags: 0
@@ -116,7 +131,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6927579938331005735}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: GroundCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -205,6 +220,10 @@ PrefabInstance:
     - target: {fileID: 8068589428734277748, guid: 27bf31f6833d5b742a6b7841e983dd6b, type: 3}
       propertyPath: m_Name
       value: Green Idle
+      objectReference: {fileID: 0}
+    - target: {fileID: 8068589428734277748, guid: 27bf31f6833d5b742a6b7841e983dd6b, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
