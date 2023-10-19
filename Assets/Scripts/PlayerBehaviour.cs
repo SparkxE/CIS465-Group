@@ -10,9 +10,12 @@ public class PlayerBehaviour : MonoBehaviour
     protected float speed = 5;
     [SerializeField] protected Rigidbody2D rb;
     [SerializeField] protected Vector2 moveInput;
+    protected bool hasAxe = false;
+
+    [SerializeField] protected GameObject darkForestPuzzle;
 
     // Start is called before the first frame update
-    private void Start()
+    private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
     }
@@ -36,5 +39,16 @@ public class PlayerBehaviour : MonoBehaviour
     public float GetSpeed()
     {
         return speed;
+    }
+
+    public void PickupAxe()
+    {
+        darkForestPuzzle.GetComponent<ForestPuzzleBehaviour>().DisableDialogue();
+        hasAxe = true;
+    }
+
+    public bool GetAxeStatus()
+    {
+        return hasAxe;
     }
 }
