@@ -7,9 +7,6 @@ using UnityEngine.SceneManagement;
 [DefaultExecutionOrder(-1)]
 public class TouchManager : MonoBehaviour
 {
-
-
-
     #region Events
         public delegate void StartTouch(Vector2 position, float time);
         public event StartTouch OnStartTouch;
@@ -18,7 +15,7 @@ public class TouchManager : MonoBehaviour
         public event EndTouch OnEndTouch;
     #endregion
 
-    //Reference to Combat_Inputs ActionMap object for swipe controls
+    //Reference to ActionMap objects for swipe controls
     private Combat_Inputs combatInputs;
     private RPGInput rpgInput;
     private Camera mainCamera;
@@ -45,7 +42,6 @@ public class TouchManager : MonoBehaviour
         else if(SceneManager.GetActiveScene().name == "Combat_Scene"){
             combatInputs.Disable();
         }
-        //Destroy(this);
     }
 
     //Runs on program start
@@ -60,25 +56,14 @@ public class TouchManager : MonoBehaviour
         }
     }
 
-    // private void OnDestroy(){
-    //     if(SceneManager.GetActiveScene().name == "Overworld_Demo"){
-    //         rpgInput.Touch.PrimaryContact.started -= ctx => StartTouchPrimary(ctx);
-    //         rpgInput.Touch.PrimaryContact.canceled -= ctx => EndTouchPrimary(ctx);
-    //     }
-    //     else if(SceneManager.GetActiveScene().name == "Combat_Scene"){
-    //         combatInputs.Touch.PrimaryContact.started -= ctx => StartTouchPrimary(ctx);
-    //         combatInputs.Touch.PrimaryContact.canceled -= ctx => EndTouchPrimary(ctx);
-    //     }
-    // }
-
     //Detecting when Touch Input Starts
     private void StartTouchPrimary(InputAction.CallbackContext context){
         if(SceneManager.GetActiveScene().name == "Overworld_Demo"){
-            Debug.Log("Touch Started " + rpgInput.Touch.PrimaryPosition.ReadValue<Vector2>());
+            // Debug.Log("Touch Started " + rpgInput.Touch.PrimaryPosition.ReadValue<Vector2>());
             if (OnStartTouch != null) OnStartTouch(Utils.ScreenToWorld(mainCamera, rpgInput.Touch.PrimaryPosition.ReadValue<Vector2>()), (float)context.startTime);
         }
         else if(SceneManager.GetActiveScene().name == "Combat_Scene"){
-            Debug.Log("Touch Started " + combatInputs.Touch.PrimaryPosition.ReadValue<Vector2>());
+            // Debug.Log("Touch Started " + combatInputs.Touch.PrimaryPosition.ReadValue<Vector2>());
             if (OnStartTouch != null) OnStartTouch(Utils.ScreenToWorld(mainCamera, combatInputs.Touch.PrimaryPosition.ReadValue<Vector2>()), (float)context.startTime);
         }
     }
@@ -86,11 +71,11 @@ public class TouchManager : MonoBehaviour
     //Detecting when Touch Input Ends
     private void EndTouchPrimary(InputAction.CallbackContext context){
         if(SceneManager.GetActiveScene().name == "Overworld_Demo"){
-            Debug.Log("Touch ended.");
+            // Debug.Log("Touch ended.");
             if (OnEndTouch != null) OnEndTouch(Utils.ScreenToWorld(mainCamera, rpgInput.Touch.PrimaryPosition.ReadValue<Vector2>()), (float)context.time);
         }
         else if(SceneManager.GetActiveScene().name == "Combat_Scene"){
-            Debug.Log("Touch ended.");
+            // Debug.Log("Touch ended.");
             if (OnEndTouch != null) OnEndTouch(Utils.ScreenToWorld(mainCamera, combatInputs.Touch.PrimaryPosition.ReadValue<Vector2>()), (float)context.time);
         }
     }
