@@ -6,16 +6,16 @@ using UnityEngine.InputSystem;
 public class PlayerBehaviour : MonoBehaviour
 {
     [SerializeField] 
-    [Range(10, 20)]
-    private float speed = 15;
-    [SerializeField] private Rigidbody2D rb;
-    private Vector2 moveInput;
+    [Range(1, 10)]
+    protected float speed = 5;
+    [SerializeField] protected Rigidbody2D rb;
+    [SerializeField] protected Vector2 moveInput;
+    protected bool hasAxe = false;
 
-    //SceneInfo for tracking player's position
-    [SerializeField] private SceneInfo sceneInfo;
+    [SerializeField] protected GameObject darkForestPuzzle;
 
     // Start is called before the first frame update
-    private void Start()
+    private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         if(transform != sceneInfo.playerPosition && sceneInfo.playerPosition != null){
@@ -39,7 +39,30 @@ public class PlayerBehaviour : MonoBehaviour
     public void SetSpeed(float newSpeed){
         speed = newSpeed;
     }
-    public float GetSpeed(){
+    public float GetSpeed()
+    {
         return speed;
+    }
+
+    public void PickupAxe()
+    {
+        darkForestPuzzle.GetComponent<ForestPuzzleBehaviour>().DisableDialogue();
+        hasAxe = true;
+    }
+
+    public bool GetAxeStatus()
+    {
+        return hasAxe;
+    }
+
+    public void PickupAxe()
+    {
+        darkForestPuzzle.GetComponent<ForestPuzzleBehaviour>().DisableDialogue();
+        hasAxe = true;
+    }
+
+    public bool GetAxeStatus()
+    {
+        return hasAxe;
     }
 }

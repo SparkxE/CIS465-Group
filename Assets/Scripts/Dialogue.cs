@@ -12,24 +12,21 @@ public class Dialogue : MonoBehaviour
 
     [Tooltip("How many seconds between each character")]
     [SerializeField] protected float textSpeed;
-    protected GameObject canvas;
-    protected GameObject player;
+    [SerializeField] protected GameObject canvas;
+    [SerializeField] protected GameObject player;
     private TouchManager inputManager;
     protected float playerSpeed;
     private int index;
-
-
-    private void Awake() {
-        inputManager = gameObject.AddComponent<TouchManager>();
-    }
-    
+    private bool dialogueActive;
     // Start is called before the first frame update
-    private void Start()
+    private void Awake()
     {
-        canvas = GameObject.Find("Canvas"); // unsure how this interacts with multiple canvi
+        inputManager = gameObject.AddComponent<TouchManager>();
+        dialogueActive = false;
+        // canvas = GameObject.Find("Canvas"); // unsure how this interacts with multiple canvi
         canvas.SetActive(false);
 
-        player = GameObject.Find("Player");
+        // player = GameObject.Find("Player");
         playerSpeed = player.GetComponent<PlayerBehaviour>().GetSpeed(); // save current speed for later
 
         textComponent.text = string.Empty;
@@ -59,14 +56,14 @@ public class Dialogue : MonoBehaviour
 
     private void OnInteract()
     {
-        if (textComponent.text == lines[index]) // if more lines to be read
+        StopAllCoroutines();
+        if (textComponent.text.Length < lines[index].Length) // if line is not finished
+        {
+            textComponent.text = lines[index];
+        }
+        else // if line is finished
         {
             NextLine();
-        }
-        else // if no more lines
-        {
-            StopAllCoroutines();
-            textComponent.text = lines[index];
         }
     }
 
@@ -85,6 +82,7 @@ public class Dialogue : MonoBehaviour
 
     private void StartDialogue()
     {
+        dialogueActive = true;
         index = 0;
         StartCoroutine(TypeLine());
     }
@@ -100,15 +98,15 @@ public class Dialogue : MonoBehaviour
 
     private void NextLine()
     {
+        textComponent.text = string.Empty;
         if (index < lines.Length - 1)
         {
             index++;
-            textComponent.text = string.Empty;
             StartCoroutine(TypeLine());
         }
         else // if no more lines to output, close dialogue
         {
-            textComponent.text = string.Empty; // clean up text so new dialogue does not open with already populated lines
+            dialogueActive = false;
             index = 0;
             canvas.SetActive(false);
             player.GetComponent<PlayerBehaviour>().SetSpeed(playerSpeed); // unfreeze player
