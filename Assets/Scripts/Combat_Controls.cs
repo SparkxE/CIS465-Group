@@ -62,7 +62,6 @@ public class Combat_Controls : MonoBehaviour
         //if the player is single-tapping the screen, start coroutine for neutral attack action
         if(Touch.activeFingers.Count == 1 && attackTimer >= attackBuffer){
             activeTouch = Touch.activeFingers[0].currentTouch;
-            Debug.Log(activeTouch.phase);
             if(activeTouch.phase == UnityEngine.InputSystem.TouchPhase.Ended && isBusy == false){
                 attackTimer = 0;
                 StartCoroutine(DelayTouchStart());
@@ -77,7 +76,6 @@ public class Combat_Controls : MonoBehaviour
     }
 
     private IEnumerator DelayTouchStart(){
-        yield return timeToTap;
         if(activeTouch.phase != UnityEngine.InputSystem.TouchPhase.Moved){
             //reset attack timer and trigger attack Animation & Function
             animator.SetTrigger("NeutralAttack");
