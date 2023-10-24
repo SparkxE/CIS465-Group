@@ -12,7 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93ab8b60205589943809b8bed2e9677c, type: 3}
   m_Name: SceneInfo
   m_EditorClassIdentifier: 
-  enemyType: BlueSlime
-  playerPosition: {x: 2.8539376, y: -1.9175922, z: 0}
-  lastTouched: {x: 0, y: 0, z: 0}
-  isDead: []
+  enemyType: GreenSlime
+  playerPosition: {x: -14.793412, y: -2.999781, z: 0}
+  lastTouched: {x: 3.33, y: -2.1, z: 0}
+  isDead:
+  - {x: 2.38, y: 2.68, z: 0}
+  - {x: 2.38, y: 2.68, z: 0}
+  - {x: 2.38, y: 2.68, z: 0}
+  - {x: -2.2, y: -3.63, z: 0}
+  - {x: -2.2, y: -3.63, z: 0}
+  - {x: -2.2, y: -3.63, z: 0}
+  - {x: 3.33, y: -2.1, z: 0}
+  - {x: 3.33, y: -2.1, z: 0}
+  - {x: 3.33, y: -2.1, z: 0}
+  - {x: 3.33, y: -2.1, z: 0}

@@ -147,6 +147,7 @@ MonoBehaviour:
   whatIsGround:
     serializedVersion: 2
     m_Bits: 8
+  attackBuffer: 0.65
   attackTransform: {fileID: 5154566565239499420}
   attackRange: 1.5
   attackLayer:
@@ -274,7 +275,7 @@ BoxCollider2D:
   m_Offset: {x: -0.75, y: -0.37}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
+    pivot: {x: 0.4, y: 0.5}
     oldSize: {x: 6.9, y: 4.4}
     newSize: {x: 13.8, y: 8.8}
     adaptiveTilingThreshold: 0.5

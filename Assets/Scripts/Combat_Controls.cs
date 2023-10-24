@@ -21,22 +21,24 @@ public class Combat_Controls : MonoBehaviour
 
     //variables & objects for attacks
     private RaycastHit2D hit;
-    private Combat_Inputs combatInputs;
+    [SerializeField] private float attackBuffer = .6f;
     [SerializeField] private Transform attackTransform;
     [SerializeField] private float attackRange = 1.5f;
     [SerializeField] private LayerMask attackLayer;
     [SerializeField] private float attackDamage = 1f;
     private Touch activeTouch;
-    private bool attackStarted;
+    private bool isBusy;
+    private float attackTimer;
     private WaitForSeconds timeToTap;
     private float tapLimit = 0.2f;
     private Animator animator;
+    // private Combat_Inputs combatInputs;
 
     //stores X-axis input value
     private float inputX;
 
     private void Awake() {
-        combatInputs = new Combat_Inputs();
+        // combatInputs = new Combat_Inputs();
         EnhancedTouchSupport.Enable();
         timeToTap = new WaitForSeconds(tapLimit);
         animator = GetComponent<Animator>();
@@ -47,30 +49,37 @@ public class Combat_Controls : MonoBehaviour
         playerBody.velocity = new Vector2(inputX * moveSpeed, playerBody.velocity.y); //moves player based on value returned from Move method
         if(inputX != 0){
             animator.SetBool("isWalking", true);
+            isBusy = true;
         }
         else{
             animator.SetBool("isWalking", false);
+            isBusy = false;
         }
         touchingGround = Physics2D.OverlapCircle(groundContact.position, .2f, whatIsGround);
     }
 
     private void Update() {
-        if(Touch.activeFingers.Count == 1){
+        //if the player is single-tapping the screen, start coroutine for neutral attack action
+        if(Touch.activeFingers.Count == 1 && attackTimer >= attackBuffer){
             activeTouch = Touch.activeFingers[0].currentTouch;
-            if(activeTouch.phase == UnityEngine.InputSystem.TouchPhase.Began && attackStarted == false){
+            Debug.Log(activeTouch.phase);
+            if(activeTouch.phase == UnityEngine.InputSystem.TouchPhase.Ended && isBusy == false){
+                attackTimer = 0;
                 StartCoroutine(DelayTouchStart());
-                attackStarted = true;
+                isBusy = true;
             }
             if(activeTouch.phase == UnityEngine.InputSystem.TouchPhase.Ended || activeTouch.phase == UnityEngine.InputSystem.TouchPhase.Canceled){
                 StopCoroutine(DelayTouchStart());
-                attackStarted = false;
+                isBusy = false;
             }
         }
+        attackTimer += Time.deltaTime;
     }
 
     private IEnumerator DelayTouchStart(){
         yield return timeToTap;
         if(activeTouch.phase != UnityEngine.InputSystem.TouchPhase.Moved){
+            //reset attack timer and trigger attack Animation & Function
             animator.SetTrigger("NeutralAttack");
             yield return new WaitForSeconds(0.3f);
             NeutralAttack();
@@ -90,7 +99,7 @@ public class Combat_Controls : MonoBehaviour
         }
     }
 
-    public void Jump(InputAction.CallbackContext context){
+    public void JumpAttack(InputAction.CallbackContext context){
         if(touchingGround){
             //apply jumping force and animation
             playerBody.velocity = new Vector2(playerBody.velocity.x, jumpForce);
