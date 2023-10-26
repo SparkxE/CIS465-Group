@@ -80,4 +80,9 @@ public class PlayerBehaviour : MonoBehaviour
     {
         return hasAxe;
     }
+
+    public void SetPosition(Vector3 position)
+    {
+        transform.position = position;
+    }
 }

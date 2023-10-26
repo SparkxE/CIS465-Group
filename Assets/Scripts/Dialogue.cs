@@ -1,10 +1,6 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using TMPro;
-using Unity.VisualScripting;
-
 public class Dialogue : MonoBehaviour
 {
     [SerializeField] protected TextMeshProUGUI textComponent;
@@ -15,55 +11,62 @@ public class Dialogue : MonoBehaviour
     [SerializeField] protected GameObject canvas;
     [SerializeField] protected GameObject player;
     private TouchManager inputManager;
+    private CanvasGroup canvasGroup;
     protected float playerSpeed;
     private int index;
-    private bool dialogueActive;
-    // Start is called before the first frame update
+    private float lastTouchTime;
+    private float delayThreshold;
+    private bool isBusy;
+    private bool thisDialogueActive;
     private void Awake()
     {
         inputManager = gameObject.AddComponent<TouchManager>();
-        dialogueActive = false;
-        // canvas = GameObject.Find("Canvas"); // unsure how this interacts with multiple canvi
-        canvas.SetActive(false);
+        canvasGroup = canvas.GetComponent<CanvasGroup>();
 
-        // player = GameObject.Find("Player");
+        canvasGroup.alpha = 0; // hide UI
+
         playerSpeed = player.GetComponent<PlayerBehaviour>().GetSpeed(); // save current speed for later
 
         textComponent.text = string.Empty;
-        // StartDialogue(); //should probably delete this line if it's not being used
+
+        lastTouchTime = -1.0f;
+        delayThreshold = 0.25f;
+        isBusy = false;
+        thisDialogueActive = false;
     }
 
-    private void OnEnable() {
+    private void OnEnable()
+    {
         inputManager.OnStartTouch += TapDialogue;
     }
-    private void OnDisable() {
+    private void OnDisable()
+    {
         inputManager.OnStartTouch -= TapDialogue;
     }
-    private void TapDialogue(Vector2 position, float time){ //only the delegate needs these parameters
-        if(canvas.activeInHierarchy == true){
+    private void TapDialogue(Vector2 position, float time)
+    { //only the delegate needs these parameters
+
+        if(thisDialogueActive == true && time - lastTouchTime >= delayThreshold)
+        {
             OnInteract();
         }
+        lastTouchTime = time;
     }
-
-    // // Update is called once per frame
-    // private void Update()
-    // {
-    //     if (Mouse.current.leftButton.wasPressedThisFrame) // change for global input (to work for tap)
-    //     {
-    //         OnInteract();
-    //     }
-    // }    //this function shouldn't be necessary (at least for now) since it's only used for text box progress
 
     private void OnInteract()
     {
         StopAllCoroutines();
-        if (textComponent.text.Length < lines[index].Length) // if line is not finished
+        if (textComponent.text.Length < lines[index].Length && isBusy == false) // if line is not finished
         {
+            Debug.Log("line not finished, complete line");
             textComponent.text = lines[index];
+            isBusy = true;
         }
-        else // if line is finished
+        else if (textComponent.text.Length == lines[index].Length || isBusy == true) // if line is finished
         {
+            Debug.Log("line finished, enter NextLine");
             NextLine();
+            isBusy = false;
         }
     }
 
@@ -72,23 +75,27 @@ public class Dialogue : MonoBehaviour
         // if this Object has collided with Player
         if (other.gameObject.GetComponent<PlayerBehaviour>())
         {
+            Debug.Log("trigger entered");
             // set Player speed to 0
             player.GetComponent<PlayerBehaviour>().SetSpeed(0); // freeze player
             // set Canvas active
-            canvas.SetActive(true);
+            thisDialogueActive = true;
+            textComponent.text = string.Empty; // clear text, just in case
+            canvasGroup.alpha = 1; // show ui
+
             StartDialogue();
         }
     }
 
     private void StartDialogue()
     {
-        dialogueActive = true;
         index = 0;
         StartCoroutine(TypeLine());
     }
 
     private IEnumerator TypeLine()
     {
+        textComponent.text = string.Empty;
         foreach(char c in lines[index].ToCharArray())
         {
             textComponent.text += c;
@@ -106,9 +113,9 @@ public class Dialogue : MonoBehaviour
         }
         else // if no more lines to output, close dialogue
         {
-            dialogueActive = false;
+            thisDialogueActive = false;
             index = 0;
-            canvas.SetActive(false);
+            canvasGroup.alpha = 0; // hide UI
             player.GetComponent<PlayerBehaviour>().SetSpeed(playerSpeed); // unfreeze player
         }
     }
