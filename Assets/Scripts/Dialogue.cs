@@ -1,9 +1,6 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using TMPro;
-using Unity.VisualScripting;
 public class Dialogue : MonoBehaviour
 {
     [SerializeField] protected TextMeshProUGUI textComponent;
@@ -17,6 +14,10 @@ public class Dialogue : MonoBehaviour
     private CanvasGroup canvasGroup;
     protected float playerSpeed;
     private int index;
+    private float lastTouchTime;
+    private float delayThreshold;
+    private bool isBusy;
+    private bool thisDialogueActive;
     private void Awake()
     {
         inputManager = gameObject.AddComponent<TouchManager>();
@@ -27,32 +28,45 @@ public class Dialogue : MonoBehaviour
         playerSpeed = player.GetComponent<PlayerBehaviour>().GetSpeed(); // save current speed for later
 
         textComponent.text = string.Empty;
+
+        lastTouchTime = -1.0f;
+        delayThreshold = 0.25f;
+        isBusy = false;
+        thisDialogueActive = false;
     }
 
-    private void OnEnable() {
+    private void OnEnable()
+    {
         inputManager.OnStartTouch += TapDialogue;
     }
-    private void OnDisable() {
+    private void OnDisable()
+    {
         inputManager.OnStartTouch -= TapDialogue;
     }
-    private void TapDialogue(Vector2 position, float time){ //only the delegate needs these parameters
-        if(canvasGroup.alpha == 1){
+    private void TapDialogue(Vector2 position, float time)
+    { //only the delegate needs these parameters
+
+        if(thisDialogueActive == true && time - lastTouchTime >= delayThreshold)
+        {
             OnInteract();
         }
+        lastTouchTime = time;
     }
 
     private void OnInteract()
     {
         StopAllCoroutines();
-        if (textComponent.text.Length < lines[index].Length) // if line is not finished
+        if (textComponent.text.Length < lines[index].Length && isBusy == false) // if line is not finished
         {
             Debug.Log("line not finished, complete line");
             textComponent.text = lines[index];
+            isBusy = true;
         }
-        else // if line is finished
+        else if (textComponent.text.Length == lines[index].Length || isBusy == true) // if line is finished
         {
             Debug.Log("line finished, enter NextLine");
             NextLine();
+            isBusy = false;
         }
     }
 
@@ -65,6 +79,7 @@ public class Dialogue : MonoBehaviour
             // set Player speed to 0
             player.GetComponent<PlayerBehaviour>().SetSpeed(0); // freeze player
             // set Canvas active
+            thisDialogueActive = true;
             textComponent.text = string.Empty; // clear text, just in case
             canvasGroup.alpha = 1; // show ui
 
@@ -80,6 +95,7 @@ public class Dialogue : MonoBehaviour
 
     private IEnumerator TypeLine()
     {
+        textComponent.text = string.Empty;
         foreach(char c in lines[index].ToCharArray())
         {
             textComponent.text += c;
@@ -97,6 +113,7 @@ public class Dialogue : MonoBehaviour
         }
         else // if no more lines to output, close dialogue
         {
+            thisDialogueActive = false;
             index = 0;
             canvasGroup.alpha = 0; // hide UI
             player.GetComponent<PlayerBehaviour>().SetSpeed(playerSpeed); // unfreeze player

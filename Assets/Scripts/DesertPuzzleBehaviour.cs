@@ -4,12 +4,18 @@ using UnityEngine;
 
 public class DesertPuzzleBehaviour : MonoBehaviour
 {
-    [SerializeField] protected GameObject image;
+    [SerializeField] protected GameObject canvas;
+    private CanvasGroup canvasGroup;
+    void Awake()
+    {
+        canvasGroup = canvas.GetComponent<CanvasGroup>();
+        canvasGroup.alpha = 0;
+    }
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.GetComponent<PlayerBehaviour>()) // You can adjust the condition based on your player's tag
         {
-            image.SetActive(true); // show warning
+            canvasGroup.alpha = 1; // show warning
         }
     }
 
@@ -17,7 +23,7 @@ public class DesertPuzzleBehaviour : MonoBehaviour
     {
         if (other.gameObject.GetComponent<PlayerBehaviour>()) // You can adjust the condition based on your player's tag
         {
-            image.SetActive(false); // hide warning
+            canvasGroup.alpha = 0; // hide warning
         }
     }
 }
