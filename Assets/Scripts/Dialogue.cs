@@ -36,7 +36,7 @@ public class Dialogue : MonoBehaviour
         inputManager.OnStartTouch -= TapDialogue;
     }
     private void TapDialogue(Vector2 position, float time){ //only the delegate needs these parameters
-        if(canvas.activeInHierarchy == true){
+        if(canvasGroup.alpha == 1){
             OnInteract();
         }
     }
@@ -46,10 +46,12 @@ public class Dialogue : MonoBehaviour
         StopAllCoroutines();
         if (textComponent.text.Length < lines[index].Length) // if line is not finished
         {
+            Debug.Log("line not finished, complete line");
             textComponent.text = lines[index];
         }
         else // if line is finished
         {
+            Debug.Log("line finished, enter NextLine");
             NextLine();
         }
     }
