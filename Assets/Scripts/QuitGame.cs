@@ -9,6 +9,10 @@ public class QuitGame : MonoBehaviour
     public void OnQuit()
     {
         sceneInfo.Reset();
+        Invoke("Quit", 1f);
+    }
+
+    private void Quit(){
         Application.Quit();
     }
 }
