@@ -21,6 +21,8 @@ public class EnemyHealth : MonoBehaviour
     [SerializeField] private float speed;
     [SerializeField] private float attackRange;
     [SerializeField] private float rangeBuffer;
+    [SerializeField] private float attackBuffer;
+    [SerializeField] private float attackSpeed;
 
     private void Awake() {
         currentHealth = maxHealth;
@@ -33,23 +35,49 @@ public class EnemyHealth : MonoBehaviour
         if(distance > attackRange + rangeBuffer){
             if(transform.position.x < target.transform.position.x){
                 enemyBody.velocity = new Vector2(speed, enemyBody.velocity.y);
+                transform.rotation = new Quaternion(0,180,0,0);
+                if(gameObject.tag == "TundraBoss" || gameObject.tag == "ForestBoss"){
+                    animator.SetBool("isWalking", true);
+                }
             }
             else if(transform.position.x > target.transform.position.x){
                 enemyBody.velocity = new Vector2(speed * -1, enemyBody.velocity.y);
+                transform.rotation = new Quaternion(0,0,0,0);
+                if(gameObject.tag == "TundraBoss" || gameObject.tag == "ForestBoss"){
+                    animator.SetBool("isWalking", true);
+                }
             }
         }else if(distance < (attackRange + rangeBuffer) && isBusy == false){
             isBusy = true;
+            if(gameObject.tag == "TundraBoss" || gameObject.tag == "ForestBoss"){
+                animator.SetBool("isWalking", false);
+            }
             Attack();
         }
     }
 
     private void Attack(){
-        animator.SetTrigger("Attack");
-        Invoke("DamagePlayer", .7f);
-        Invoke("ClearStack", 2.5f);
+        if(gameObject.tag == "TundraBoss" || gameObject.tag == "ForestBoss" || gameObject.tag == "DesertBoss"){
+            int attackChoice = Random.Range(0,2);
+            if(attackChoice == 0){
+                animator.SetTrigger("Attack1");
+                Invoke("DamagePlayer", attackSpeed);
+                Invoke("ClearBusy", attackBuffer);
+            }
+            else if(attackChoice == 1){
+                animator.SetTrigger("Attack2");
+                Invoke("DamagePlayer", attackSpeed);
+                Invoke("ClearBusy", attackBuffer);
+            }
+        }
+        else{
+            animator.SetTrigger("Attack");
+            Invoke("DamagePlayer", attackSpeed);
+            Invoke("ClearBusy", attackBuffer);
+        }
     }
 
-    private void ClearStack(){
+    private void ClearBusy(){
         isBusy = false;
     }
 
