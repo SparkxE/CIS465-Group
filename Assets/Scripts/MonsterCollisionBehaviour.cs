@@ -32,7 +32,7 @@ public class MonsterCollisionBehaviour : MonoBehaviour
         sceneInfo.lastTouched = transform.position;
         sceneInfo.enemyType = enemyName;
         // if this Monster has collided with Player
-        if (other.gameObject.tag == "ColliderBox")
+        if (other.gameObject.tag == "CollisionBox")
         {
             SceneManager.LoadScene("Combat_Scene", LoadSceneMode.Single);
         }
