@@ -24,9 +24,9 @@ public class ForestPuzzleBehaviour : MonoBehaviour
 
     private void OnTriggerEnter2D (Collider2D col)
     {
-        if (col.gameObject.GetComponent<PlayerBehaviour>())
+        if (col.gameObject.tag == "CollisionBox")
         {
-            if (col.gameObject.GetComponent<PlayerBehaviour>().GetAxeStatus())
+            if (col.gameObject.GetComponentInParent<PlayerBehaviour>().GetAxeStatus())
             {
                 Destroy(this.gameObject);
             }

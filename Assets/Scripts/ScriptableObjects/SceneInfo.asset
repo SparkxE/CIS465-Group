@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: SceneInfo
   m_EditorClassIdentifier: 
   enemyType: None
-  playerPosition: {x: 0, y: 0, z: 0}
+  playerPosition: {x: -2.3892543, y: 3.5429487, z: -1}
   lastTouched: {x: 0, y: 0, z: 0}
   isDead: []

@@ -13,7 +13,7 @@ public class DesertPuzzleBehaviour : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.GetComponent<PlayerBehaviour>()) // You can adjust the condition based on your player's tag
+        if (other.gameObject.tag == "TriggerBox")
         {
             canvasGroup.alpha = 1; // show warning
         }
@@ -21,7 +21,7 @@ public class DesertPuzzleBehaviour : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        if (other.gameObject.GetComponent<PlayerBehaviour>()) // You can adjust the condition based on your player's tag
+        if (other.gameObject.tag == "TriggerBox")
         {
             canvasGroup.alpha = 0; // hide warning
         }

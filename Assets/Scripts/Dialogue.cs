@@ -73,7 +73,7 @@ public class Dialogue : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         // if this Object has collided with Player
-        if (other.gameObject.GetComponent<PlayerBehaviour>())
+        if (other.gameObject.tag == "CollisionBox")
         {
             Debug.Log("trigger entered");
             // set Player speed to 0

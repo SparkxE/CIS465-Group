@@ -18,9 +18,9 @@ public class AxeBehaviour : MonoBehaviour
 
     private void OnTriggerEnter2D (Collider2D col)
     {
-        if (col.gameObject.GetComponent<PlayerBehaviour>())
+        if (col.gameObject.tag == "TriggerBox")
         {
-            col.gameObject.GetComponent<PlayerBehaviour>().PickupAxe();
+            col.gameObject.GetComponentInParent<PlayerBehaviour>().PickupAxe();
             Destroy(this.gameObject);
         }
     }

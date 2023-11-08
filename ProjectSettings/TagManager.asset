@@ -7,6 +7,8 @@ TagManager:
   - BlueSlime
   - RedSlime
   - GreenSlime
+  - TriggerBox
+  - CollisionBox
   layers:
   - Default
   - TransparentFX

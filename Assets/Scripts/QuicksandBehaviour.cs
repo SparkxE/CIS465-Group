@@ -21,7 +21,7 @@ public class QuicksandBehaviour : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         // if this Object has collided with Player
-        if (other.gameObject.GetComponent<PlayerBehaviour>())
+        if (other.gameObject.tag == "TriggerBox")
         {
             Debug.Log("quicksand encountered");
             player.GetComponent<PlayerBehaviour>().SetPosition(spawn);
