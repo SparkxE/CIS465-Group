@@ -12,7 +12,7 @@ public class Combat_Controls : MonoBehaviour
     //Rigidbody reference to allow changes to player character based on movement inputs
     [SerializeField] protected Rigidbody2D playerBody;
 
-    //stores default movement speed
+    //values for movement and whether the player is touching the ground
     [SerializeField] private float moveSpeed = 5f;
     [SerializeField] private float jumpForce = 3f;
     private bool touchingGround;
@@ -21,7 +21,7 @@ public class Combat_Controls : MonoBehaviour
 
     //variables & objects for attacks
     private RaycastHit2D hit;
-    [SerializeField] private float attackBuffer = .6f;
+    [SerializeField] private float attackBuffer = .6f;  // buffers how frequently attacks can be signaled
     [SerializeField] private Transform attackTransform;
     [SerializeField] private float attackRange = 1.5f;
     [SerializeField] private LayerMask attackLayer;
@@ -30,7 +30,7 @@ public class Combat_Controls : MonoBehaviour
     private bool isBusy;
     private float attackTimer;
     private WaitForSeconds timeToTap;
-    private float tapLimit = 0.2f;
+    [SerializeField] private float tapLimit = 0.3f;
     private Animator animator;
     // private Combat_Inputs combatInputs;
 
@@ -79,7 +79,7 @@ public class Combat_Controls : MonoBehaviour
         if(activeTouch.phase != UnityEngine.InputSystem.TouchPhase.Moved){
             //reset attack timer and trigger attack Animation & Function
             animator.SetTrigger("NeutralAttack");
-            yield return new WaitForSeconds(0.3f);
+            yield return timeToTap;
             NeutralAttack();
         }
         yield break;
@@ -89,18 +89,53 @@ public class Combat_Controls : MonoBehaviour
     public void Move(InputAction.CallbackContext context){
         //set X-axis movement value based on action value
         inputX = context.ReadValue<Vector2>().x;
+        isBusy = true;
         if(inputX<0){
             transform.rotation = new Quaternion(0,180,0,0);
         }
         else if(inputX>0){
             transform.rotation = new Quaternion(0,0,0,0);
         }
+        else{
+            Invoke("ClearBusy", .25f);
+        }
     }
 
-    public void JumpAttack(InputAction.CallbackContext context){
-        if(touchingGround){
-            //apply jumping force and animation
-            playerBody.velocity = new Vector2(playerBody.velocity.x, jumpForce);
+    private void ClearBusy(){
+        isBusy = false;
+    }
+
+    public void JumpAttack(){
+        if(isBusy == false){
+            isBusy = true;
+            if(touchingGround){
+                //apply jumping force and animation
+                playerBody.velocity = new Vector2(playerBody.velocity.x, jumpForce);
+            }
+            Debug.Log("Jump Attack");
+            Invoke("ClearBusy", .25f);
+        }
+    }
+
+    public void DashAttack(bool isLeft){
+        if(isBusy == false){
+            isBusy = true;
+            if(isLeft == true){
+                transform.rotation = new Quaternion(0,180,0,0);
+            }
+            else if(isLeft == false){
+                transform.rotation = new Quaternion(0,0,0,0);
+            }
+            Debug.Log("Dash Attack");
+            Invoke("ClearBusy", .25f);
+        }
+    }
+
+    public void SlideAttack(){
+        if(isBusy == false){
+            isBusy = true;
+            Debug.Log("Slide Attack");
+            Invoke("ClearBusy", .25f);
         }
     }
 

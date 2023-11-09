@@ -8925,11 +8925,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8545664175199600611, guid: 38454da1f750d7e4b935b3d9569313c6, type: 3}
   m_PrefabInstance: {fileID: 427489401}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &450507951 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6260667796942083562, guid: 7ff8b2981ed811044bd03fd433233645, type: 3}
-  m_PrefabInstance: {fileID: 673335673}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -10185,7 +10180,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6260667796942083562, guid: 7ff8b2981ed811044bd03fd433233645, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8315228810178785679, guid: 7ff8b2981ed811044bd03fd433233645, type: 3}
       propertyPath: m_SortingOrder
@@ -11135,7 +11130,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -80.299805, y: -34.04004}
+  m_AnchoredPosition: {x: -80, y: -35}
   m_SizeDelta: {x: 100, y: 75}
   m_Pivot: {x: 1, y: 1}
 --- !u!114 &1551354080
@@ -11559,7 +11554,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1967718920}
   - component: {fileID: 1967718919}
-  - component: {fileID: 1967718918}
   m_Layer: 0
   m_Name: Managers
   m_TagString: Untagged
@@ -11567,21 +11561,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1967718918
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1967718917}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fff8c91ca866c27409b4e07ccc9b775c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  minimumDistance: 0.2
-  maximumTime: 1
-  trail: {fileID: 450507951}
 --- !u!114 &1967718919
 MonoBehaviour:
   m_ObjectHideFlags: 0
