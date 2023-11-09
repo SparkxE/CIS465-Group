@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93ab8b60205589943809b8bed2e9677c, type: 3}
   m_Name: SceneInfo
   m_EditorClassIdentifier: 
-  enemyType: None
-  playerPosition: {x: -2.3892543, y: 3.5429487, z: -1}
-  lastTouched: {x: 0, y: 0, z: 0}
+  enemyType: TundraBoss
+  playerPosition: {x: -1.9883043, y: 30.881216, z: 0}
+  lastTouched: {x: -1.0006285, y: 30.075422, z: 7.4915123}
   isDead: []
