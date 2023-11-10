@@ -8,6 +8,7 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] private float maxHealth = 5f;
     [SerializeField] private TMP_Text youDied;
     [SerializeField] private TMP_Text retry;
+    [SerializeField] private TMP_Text healthDisplay;
     private float currentHealth;
     private Animator animator;
     private bool isDead = false;
@@ -15,6 +16,9 @@ public class PlayerHealth : MonoBehaviour
     private void Awake() {
         currentHealth = maxHealth;
         animator = GetComponent<Animator>();
+    }
+    private void Update() {
+        healthDisplay.text = "HP: " + currentHealth;
     }
     public void Damage(float damageAmount){
         if(isDead == false){
@@ -24,6 +28,8 @@ public class PlayerHealth : MonoBehaviour
                 //die
                 animator.SetTrigger("Death");
                 Invoke("Die", 1f);
+                gameObject.GetComponent<BoxCollider2D>().enabled = false;
+                gameObject.GetComponent<Rigidbody2D>().gravityScale = 0;
                 isDead = true;
             }
         }

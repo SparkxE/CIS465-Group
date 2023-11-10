@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.EnhancedTouch;
@@ -26,8 +27,12 @@ public class Combat_Controls : MonoBehaviour
     [SerializeField] private float attackRange = 1.5f;
     [SerializeField] private LayerMask attackLayer;
     [SerializeField] private float attackDamage = 1f;
+    [SerializeField] private float slideSpeed;
+    [SerializeField] private float maxSlideTime; 
     private Touch activeTouch;
     private bool isBusy;
+    private bool isSliding;
+    private float slideTimer;
     private float attackTimer;
     private WaitForSeconds timeToTap;
     [SerializeField] private float tapLimit = 0.3f;
@@ -46,14 +51,22 @@ public class Combat_Controls : MonoBehaviour
 
     private void FixedUpdate(){
         //Update player's current velocity based on previous inputs, check if the player is touching the ground
-        playerBody.velocity = new Vector2(inputX * moveSpeed, playerBody.velocity.y); //moves player based on value returned from Move method
-        if(inputX != 0){
-            animator.SetBool("isWalking", true);
-            isBusy = true;
+        if(isSliding == true){
+            slideTimer = Time.deltaTime;
+            if(slideTimer < maxSlideTime){
+                playerBody.velocity = new Vector2(slideSpeed, playerBody.velocity.y);
+            }
         }
         else{
-            animator.SetBool("isWalking", false);
-            isBusy = false;
+            playerBody.velocity = new Vector2(inputX * moveSpeed, playerBody.velocity.y); //moves player based on value returned from Move method
+            if(inputX != 0){
+                animator.SetBool("isWalking", true);
+                isBusy = true;
+            }
+            else{
+                animator.SetBool("isWalking", false);
+                isBusy = false;
+            }
         }
         touchingGround = Physics2D.OverlapCircle(groundContact.position, .2f, whatIsGround);
     }
@@ -64,23 +77,23 @@ public class Combat_Controls : MonoBehaviour
             activeTouch = Touch.activeFingers[0].currentTouch;
             if(activeTouch.phase == UnityEngine.InputSystem.TouchPhase.Ended && isBusy == false){
                 attackTimer = 0;
-                StartCoroutine(DelayTouchStart());
+                StartCoroutine(NeutralAttack());
                 isBusy = true;
             }
             if(activeTouch.phase == UnityEngine.InputSystem.TouchPhase.Ended || activeTouch.phase == UnityEngine.InputSystem.TouchPhase.Canceled){
-                StopCoroutine(DelayTouchStart());
+                StopCoroutine(NeutralAttack());
                 isBusy = false;
             }
         }
         attackTimer += Time.deltaTime;
     }
 
-    private IEnumerator DelayTouchStart(){
+    private IEnumerator NeutralAttack(){
         if(activeTouch.phase != UnityEngine.InputSystem.TouchPhase.Moved){
             //reset attack timer and trigger attack Animation & Function
             animator.SetTrigger("NeutralAttack");
             yield return timeToTap;
-            NeutralAttack();
+            AttackDamage();
         }
         yield break;
     }
@@ -103,6 +116,8 @@ public class Combat_Controls : MonoBehaviour
 
     private void ClearBusy(){
         isBusy = false;
+        isSliding = false;
+        slideTimer = 0f;
     }
 
     public void JumpAttack(){
@@ -110,7 +125,10 @@ public class Combat_Controls : MonoBehaviour
             isBusy = true;
             if(touchingGround){
                 //apply jumping force and animation
+                animator.SetTrigger("JumpAttack");
                 playerBody.velocity = new Vector2(playerBody.velocity.x, jumpForce);
+                Invoke("AttackDamage", 0.1f);
+                // AttackDamage();
             }
             Debug.Log("Jump Attack");
             Invoke("ClearBusy", .25f);
@@ -120,12 +138,17 @@ public class Combat_Controls : MonoBehaviour
     public void DashAttack(bool isLeft){
         if(isBusy == false){
             isBusy = true;
+            isSliding = true;
             if(isLeft == true){
+                slideSpeed *= -1;
                 transform.rotation = new Quaternion(0,180,0,0);
             }
             else if(isLeft == false){
+                slideSpeed = math.abs(slideSpeed);
                 transform.rotation = new Quaternion(0,0,0,0);
             }
+            animator.SetTrigger("DashAttack");
+            Invoke("AttackDamage", 0.75f);
             Debug.Log("Dash Attack");
             Invoke("ClearBusy", .25f);
         }
@@ -134,12 +157,22 @@ public class Combat_Controls : MonoBehaviour
     public void SlideAttack(){
         if(isBusy == false){
             isBusy = true;
+            isSliding = true;
+            Debug.Log(transform.rotation.y);
+            if(transform.rotation.y == 1f){
+                slideSpeed *= -1;
+            }
+            else{
+                slideSpeed = math.abs(slideSpeed);
+            }
+            animator.SetTrigger("SlideAttack");
+            Invoke("AttackDamage", 0.6f);
             Debug.Log("Slide Attack");
             Invoke("ClearBusy", .25f);
         }
     }
 
-    private void NeutralAttack(){
+    private void AttackDamage(){
         // Debug.Log("Attacked");
         hit = Physics2D.CircleCast(attackTransform.position, attackRange, transform.right, 0f, attackLayer);
         EnemyHealth enemyHealth = hit.collider.gameObject.GetComponent<EnemyHealth>();
