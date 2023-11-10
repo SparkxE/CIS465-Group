@@ -8,7 +8,7 @@ public class SwipeDetection : MonoBehaviour
     //Variables for determining swipe direction and timing
     [SerializeField] private float minimumDistance = 0.2f;
     [SerializeField] private float maximumTime = 1f;
-    // [SerializeField, Range(0f, 1f)] private float directionThreshold = 0.7f;
+    [SerializeField, Range(0f, 1f)] private float directionThreshold = 0.7f;
     private Vector2 startPosition;
     private float startTime;
     private Vector2 endPosition;
@@ -22,9 +22,14 @@ public class SwipeDetection : MonoBehaviour
     //TouchManager reference to recognize touch events
     private TouchManager inputManager;
 
+    //Combat_Controls reference for calling swipe-based attack actions
+    [SerializeField] private GameObject player;
+    private Combat_Controls combatControls;
+
     //Setup functions for activating/disabling swipe detection
     private void Awake() {
         inputManager = gameObject.GetComponent<TouchManager>();
+        combatControls = player.GetComponent<Combat_Controls>();
     }
     private void OnEnable() {
         inputManager.OnStartTouch += SwipeStart;
@@ -65,27 +70,27 @@ public class SwipeDetection : MonoBehaviour
     private void DetectSwipe(){
         if(Vector3.Distance(startPosition, endPosition) >= minimumDistance &&
             (endTime-startTime)<= maximumTime){
-                // Debug.DrawLine(startPosition, endPosition, Color.red, 5f);
+                Debug.DrawLine(startPosition, endPosition, Color.red, 5f);
                 Vector3 direction = endPosition - startPosition;
                 Vector2 direction2D = new Vector2(direction.x, direction.y).normalized;
-                // SwipeDirection(direction2D);
+                SwipeDirection(direction2D);
             }
     }
 
-    // //Logging for recognizing swipe directions
-    // private void SwipeDirection(Vector2 direction){
-    //     //InputAction.CallbackContext context;
-    //     if(Vector2.Dot(Vector2.up, direction) > directionThreshold){
-    //         Debug.Log("Swipe Up");
-    //     }
-    //     if(Vector2.Dot(Vector2.down, direction) > directionThreshold){
-    //         Debug.Log("Swipe Down");
-    //     }
-    //     if(Vector2.Dot(Vector2.left, direction) > directionThreshold){
-    //         Debug.Log("Swipe Left");
-    //     }
-    //     if(Vector2.Dot(Vector2.right, direction) > directionThreshold){
-    //         Debug.Log("Swipe Right");
-    //     }
-    // }
+    // swipe direction detection for swipe-based inputs
+    private void SwipeDirection(Vector2 direction){
+        //InputAction.CallbackContext context;
+        if(Vector2.Dot(Vector2.up, direction) > directionThreshold){
+            combatControls.JumpAttack();
+        }
+        if(Vector2.Dot(Vector2.down, direction) > directionThreshold){
+            combatControls.SlideAttack();
+        }
+        if(Vector2.Dot(Vector2.left, direction) > directionThreshold){
+            combatControls.DashAttack(true);
+        }
+        if(Vector2.Dot(Vector2.right, direction) > directionThreshold){
+            combatControls.DashAttack(false);
+        }
+    }
 }

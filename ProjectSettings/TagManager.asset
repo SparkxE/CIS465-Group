@@ -3,21 +3,16 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags:
-  - BlueSlime
-  - RedSlime
-  - GreenSlime
-  - TriggerBox
-  - CollisionBox
+  tags: []
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - Floor
+  - 
   - Water
   - UI
   - 
-  - Attackable
+  - 
   - 
   - 
   - 
@@ -43,18 +38,6 @@ TagManager:
   - 
   - 
   m_SortingLayers:
-  - name: TrailRenderer
-    uniqueID: 774652299
-    locked: 0
-  - name: Background
-    uniqueID: 3358412435
-    locked: 0
   - name: Default
     uniqueID: 0
-    locked: 0
-  - name: Characters
-    uniqueID: 946236365
-    locked: 0
-  - name: UI
-    uniqueID: 436200733
     locked: 0
