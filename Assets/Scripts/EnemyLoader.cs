@@ -14,14 +14,44 @@ public class EnemyLoader : MonoBehaviour
             case "BlueSlime":
                 GameObject.FindGameObjectWithTag("RedSlime").SetActive(false);
                 GameObject.FindGameObjectWithTag("GreenSlime").SetActive(false);
+                GameObject.FindGameObjectWithTag("DesertBoss").SetActive(false);
+                GameObject.FindGameObjectWithTag("TundraBoss").SetActive(false);
+                GameObject.FindGameObjectWithTag("ForestBoss").SetActive(false);
                 break;
             case "RedSlime": 
                 GameObject.FindGameObjectWithTag("GreenSlime").SetActive(false);
                 GameObject.FindGameObjectWithTag("BlueSlime").SetActive(false);
+                GameObject.FindGameObjectWithTag("DesertBoss").SetActive(false);
+                GameObject.FindGameObjectWithTag("TundraBoss").SetActive(false);
+                GameObject.FindGameObjectWithTag("ForestBoss").SetActive(false);
                 break;
             case "GreenSlime":
                 GameObject.FindGameObjectWithTag("BlueSlime").SetActive(false);
                 GameObject.FindGameObjectWithTag("RedSlime").SetActive(false);
+                GameObject.FindGameObjectWithTag("DesertBoss").SetActive(false);
+                GameObject.FindGameObjectWithTag("TundraBoss").SetActive(false);
+                GameObject.FindGameObjectWithTag("ForestBoss").SetActive(false);
+                break;
+            case "ForestBoss":
+                GameObject.FindGameObjectWithTag("BlueSlime").SetActive(false);
+                GameObject.FindGameObjectWithTag("RedSlime").SetActive(false);
+                GameObject.FindGameObjectWithTag("GreenSlime").SetActive(false);
+                GameObject.FindGameObjectWithTag("DesertBoss").SetActive(false);
+                GameObject.FindGameObjectWithTag("TundraBoss").SetActive(false);
+                break;
+            case "DesertBoss":
+                GameObject.FindGameObjectWithTag("BlueSlime").SetActive(false);
+                GameObject.FindGameObjectWithTag("RedSlime").SetActive(false);
+                GameObject.FindGameObjectWithTag("GreenSlime").SetActive(false);
+                GameObject.FindGameObjectWithTag("ForestBoss").SetActive(false);
+                GameObject.FindGameObjectWithTag("TundraBoss").SetActive(false);
+                break;
+            case "TundraBoss":
+                GameObject.FindGameObjectWithTag("BlueSlime").SetActive(false);
+                GameObject.FindGameObjectWithTag("RedSlime").SetActive(false);
+                GameObject.FindGameObjectWithTag("GreenSlime").SetActive(false);
+                GameObject.FindGameObjectWithTag("DesertBoss").SetActive(false);
+                GameObject.FindGameObjectWithTag("ForestBoss").SetActive(false);
                 break;
         }
     }
