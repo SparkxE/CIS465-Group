@@ -5,16 +5,9 @@ using UnityEngine;
 public class ForestPuzzleBehaviour : MonoBehaviour
 {
     private Behaviour dialogueScript;
-    // Start is called before the first frame update
     void Awake()
     {
         dialogueScript = GetComponent<Dialogue>();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        //
     }
 
     public void DisableDialogue()

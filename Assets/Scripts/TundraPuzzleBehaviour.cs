@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using UnityEngine.SceneManagement;
 
 public class TundraPuzzleBehaviour : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class TundraPuzzleBehaviour : MonoBehaviour
     [SerializeField] protected GameObject secondLayer;
     [SerializeField] protected GameObject player;
     [SerializeField] protected GameObject boss;
+    [SerializeField] protected SceneInfo sceneInfo;
     private Vector3Int lastTilePos;
     private Vector3Int tilePos;
     private Tilemap firstTilemap;
@@ -20,6 +22,7 @@ public class TundraPuzzleBehaviour : MonoBehaviour
 
     void Awake()
     {
+        SceneManager.sceneLoaded += OnSceneLoaded;
         firstTilemap = firstLayer.GetComponent<Tilemap>();
         bounds = firstTilemap.cellBounds;
         initialTilemapData = firstTilemap.GetTilesBlock(bounds);
@@ -28,6 +31,10 @@ public class TundraPuzzleBehaviour : MonoBehaviour
 
         offset = new Vector3(-0.1f,-1.2f,0f); // magic numbers that make sure we are tracking at player's feet which is approx. where TriggerBox lies
         lastTilePos = firstTilemap.WorldToCell(player.transform.position + offset);
+    }
+
+    private void OnDisable() {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
     // Update is called once per frame
@@ -40,10 +47,13 @@ public class TundraPuzzleBehaviour : MonoBehaviour
             {
                 player.GetComponent<PlayerBehaviour>().SetPosition(new Vector3(0,0,0)); // spawn player to center
                 firstTilemap.SetTilesBlock(firstTilemap.cellBounds, initialTilemapData); // reset ice puzzle
+                sceneInfo.icePuzzle.SetTilesBlock(firstTilemap.cellBounds, initialTilemapData); // reset ice puzzle in sceneinfo
+
             }
             else // tile is not broken at all
             {
                 firstTilemap.SetTile(tilePos, null); // half break tile
+                sceneInfo.icePuzzle.SetTile(tilePos, null); // update sceneinfo to reflect change
                 if (AllTilesNull())
                 {
                     Debug.Log("boss spawn");
@@ -67,5 +77,14 @@ public class TundraPuzzleBehaviour : MonoBehaviour
         }
 
         return true; // all tiles have been cleared, so puzzle is complete
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode){
+        if(scene.name == "Overworld_Demo"){
+            if(firstTilemap != sceneInfo.icePuzzle && sceneInfo.icePuzzle != null){
+                firstTilemap = Instantiate(sceneInfo.icePuzzle);
+            }
+            else sceneInfo.icePuzzle = firstTilemap;
+        }
     }
 }

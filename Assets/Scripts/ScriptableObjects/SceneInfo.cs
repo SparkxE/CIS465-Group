@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 [CreateAssetMenu(fileName = "SceneInfo", menuName = "Persistence")]
 public class SceneInfo : ScriptableObject
@@ -9,6 +10,8 @@ public class SceneInfo : ScriptableObject
     public Vector3 playerPosition;
     public Vector3 lastTouched;
     public List<Vector3> isDead = new List<Vector3>();
+
+    public Tilemap icePuzzle;
 
     public void Reset(){
         playerPosition = new Vector3(0,0,0);

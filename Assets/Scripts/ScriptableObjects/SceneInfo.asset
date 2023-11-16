@@ -12,7 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93ab8b60205589943809b8bed2e9677c, type: 3}
   m_Name: SceneInfo
   m_EditorClassIdentifier: 
-  enemyType: TundraBoss
-  playerPosition: {x: -1.9883043, y: 30.881216, z: 0}
-  lastTouched: {x: -1.0006285, y: 30.075422, z: 7.4915123}
-  isDead: []
+  enemyType: BlueSlime
+  playerPosition: {x: -2.569292, y: 28.617537, z: 0}
+  lastTouched: {x: -1.4762588, y: 24.48801, z: 1}
+  isDead:
+  - {x: -1.4762588, y: 24.48801, z: 1}
+  icePuzzle: {fileID: 0}

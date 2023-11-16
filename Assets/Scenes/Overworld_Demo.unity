@@ -4982,6 +4982,7 @@ MonoBehaviour:
   secondLayer: {fileID: 108996578}
   player: {fileID: 1102863718}
   boss: {fileID: 1283018462}
+  sceneInfo: {fileID: 11400000, guid: 83ac91f4b21a34f4692cf4ded80d0fcf, type: 2}
 --- !u!4 &627591555 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7060331821208060588, guid: c96bb3f176e223a47a1ef2f2562d1d11, type: 3}
@@ -5078,7 +5079,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   textComponent: {fileID: 816266407}
   lines:
-  - Example...
+  - You need some sort of tool to break down this wall...
   textSpeed: 0.04
   canvas: {fileID: 2082270084}
   player: {fileID: 1102863718}
