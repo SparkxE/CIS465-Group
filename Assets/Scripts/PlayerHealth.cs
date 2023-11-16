@@ -11,11 +11,13 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] private TMP_Text healthDisplay;
     private float currentHealth;
     private Animator animator;
+    private Combat_Controls combat;
     private bool isDead = false;
 
     private void Awake() {
         currentHealth = maxHealth;
         animator = GetComponent<Animator>();
+        combat = gameObject.GetComponent<Combat_Controls>();
     }
     private void Update() {
         healthDisplay.text = "HP: " + currentHealth;
@@ -23,6 +25,7 @@ public class PlayerHealth : MonoBehaviour
     public void Damage(float damageAmount){
         if(isDead == false){
             currentHealth -= damageAmount;
+            combat.BeenHit(true);
             animator.SetTrigger("Damage");
             if(currentHealth <= 0){
                 //die

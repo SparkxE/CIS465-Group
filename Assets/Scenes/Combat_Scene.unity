@@ -341,7 +341,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 273332426}
-  m_Layer: 7
+  m_Layer: 6
   m_Name: AttackTransform
   m_TagString: Untagged
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
@@ -453,7 +453,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 450619453}
-  m_Layer: 7
+  m_Layer: 6
   m_Name: AttackTransform
   m_TagString: Untagged
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
@@ -921,7 +921,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 661455895}
-  m_Layer: 8
+  m_Layer: 6
   m_Name: AttackTransform
   m_TagString: Untagged
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
@@ -1093,7 +1093,7 @@ GameObject:
   - component: {fileID: 803527250}
   - component: {fileID: 803527249}
   - component: {fileID: 803527254}
-  m_Layer: 7
+  m_Layer: 6
   m_Name: ForestBoss_Combat
   m_TagString: ForestBoss
   m_Icon: {fileID: 0}
@@ -1278,7 +1278,7 @@ MonoBehaviour:
   attackTransform: {fileID: 1059905125}
   attackLayer:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 1
   enemyBody: {fileID: 803527250}
   speed: 3
   attackRange: 1.5
@@ -1545,7 +1545,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1059905125}
-  m_Layer: 7
+  m_Layer: 6
   m_Name: AttackTransform
   m_TagString: Untagged
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
@@ -1576,7 +1576,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1106090891}
-  m_Layer: 8
+  m_Layer: 6
   m_Name: AttackTransform
   m_TagString: Untagged
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
@@ -1612,7 +1612,7 @@ GameObject:
   - component: {fileID: 1199186433}
   - component: {fileID: 1199186432}
   - component: {fileID: 1199186437}
-  m_Layer: 7
+  m_Layer: 6
   m_Name: DesertBoss_Combat
   m_TagString: DesertBoss
   m_Icon: {fileID: 0}
@@ -1797,7 +1797,7 @@ MonoBehaviour:
   attackTransform: {fileID: 273332426}
   attackLayer:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 1
   enemyBody: {fileID: 1199186433}
   speed: 1.5
   attackRange: 1.5
@@ -1813,7 +1813,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1203407282}
-  m_Layer: 8
+  m_Layer: 6
   m_Name: AttackTransform
   m_TagString: Untagged
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
@@ -2357,7 +2357,7 @@ GameObject:
   - component: {fileID: 1678568411}
   - component: {fileID: 1678568415}
   - component: {fileID: 1678568416}
-  m_Layer: 7
+  m_Layer: 6
   m_Name: TundraBoss_Combat
   m_TagString: TundraBoss
   m_Icon: {fileID: 0}
@@ -2542,7 +2542,7 @@ MonoBehaviour:
   attackTransform: {fileID: 450619453}
   attackLayer:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 1
   enemyBody: {fileID: 1678568411}
   speed: 1.5
   attackRange: 2
@@ -2965,7 +2965,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1860483606685218821}
-  m_Layer: 7
+  m_Layer: 6
   m_Name: GroundCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3117,7 +3117,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3367507255365240370}
-  m_Layer: 7
+  m_Layer: 6
   m_Name: GroundCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3178,7 +3178,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 946236365
-  m_SortingLayer: 1
+  m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: -3318188226485093758, guid: ae72133dacba6ec4eb33ecde48f50e56, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -3229,7 +3229,7 @@ MonoBehaviour:
   attackTransform: {fileID: 1203407282}
   attackLayer:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 1
   enemyBody: {fileID: 160052684248578942}
   speed: 2.5
   attackRange: 2
@@ -3268,7 +3268,7 @@ MonoBehaviour:
   attackTransform: {fileID: 1106090891}
   attackLayer:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 1
   enemyBody: {fileID: 5551041623679202281}
   speed: 2.5
   attackRange: 2
@@ -3407,7 +3407,7 @@ GameObject:
   - component: {fileID: 3051774851461092497}
   - component: {fileID: 5259616143113026380}
   - component: {fileID: 1052332082061503885}
-  m_Layer: 7
+  m_Layer: 6
   m_Name: RedSlime_Combat
   m_TagString: RedSlime
   m_Icon: {fileID: 0}
@@ -3455,7 +3455,7 @@ MonoBehaviour:
   attackRange: 1.5
   attackLayer:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 64
   attackDamage: 1
   slideSpeed: 8
   maxSlideTime: 0.75
@@ -3486,7 +3486,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8459416932841805541}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: GroundCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3653,7 +3653,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 118553577901546625}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: AttackTransform
   m_TagString: Untagged
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
@@ -3677,7 +3677,7 @@ MonoBehaviour:
   attackTransform: {fileID: 661455895}
   attackLayer:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 1
   enemyBody: {fileID: 5338696852851720483}
   speed: 2.5
   attackRange: 2
@@ -3698,7 +3698,7 @@ GameObject:
   - component: {fileID: 3557684573116693593}
   - component: {fileID: 7619221993939759144}
   - component: {fileID: 1436442708}
-  m_Layer: 7
+  m_Layer: 6
   m_Name: GreenSlime_Combat
   m_TagString: GreenSlime
   m_Icon: {fileID: 0}
@@ -3714,7 +3714,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6598228007659161354}
-  m_Layer: 7
+  m_Layer: 6
   m_Name: GroundCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3769,7 +3769,7 @@ GameObject:
   - component: {fileID: 3000489310923457199}
   - component: {fileID: 2905807179364658325}
   - component: {fileID: 8227171380409111420}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -3838,7 +3838,7 @@ GameObject:
   - component: {fileID: 6275115638013278103}
   - component: {fileID: 3902038168054603874}
   - component: {fileID: 3838749228093630789}
-  m_Layer: 7
+  m_Layer: 6
   m_Name: BlueSlime_Combat
   m_TagString: BlueSlime
   m_Icon: {fileID: 0}
@@ -3900,12 +3900,12 @@ SceneRoots:
   - {fileID: 519420032}
   - {fileID: 1242350811}
   - {fileID: 8227171380409111419}
-  - {fileID: 4131303953688731371}
   - {fileID: 1927111615}
   - {fileID: 2105767653}
   - {fileID: 302005347}
   - {fileID: 747598492}
   - {fileID: 6669378695868860162}
+  - {fileID: 4131303953688731371}
   - {fileID: 4570706286938284341}
   - {fileID: 1534081743}
   - {fileID: 1678568414}

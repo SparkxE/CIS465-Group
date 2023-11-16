@@ -30,14 +30,15 @@ public class Combat_Controls : MonoBehaviour
     [SerializeField] private float slideSpeed;
     [SerializeField] private float maxSlideTime; 
     private Touch activeTouch;
-    private bool isBusy;
+    private bool isBusy = false;    // whether the player is doing something, prevents spamming
+    private bool beenHit = false;   // whether the player has been hit, allows attacks to be interrupted
     private bool isSliding;
     private float slideTimer;
     private float attackTimer;
     private WaitForSeconds timeToTap;
     [SerializeField] private float tapLimit = 0.3f;
     private Animator animator;
-    // private Combat_Inputs combatInputs;
+        // private Combat_Inputs combatInputs;
 
     //stores X-axis input value
     private float inputX;
@@ -114,8 +115,15 @@ public class Combat_Controls : MonoBehaviour
         }
     }
 
+    // allows PlayerHealth script to change the value of beenHit
+    public void BeenHit(bool status){
+        beenHit = status;
+    }
+
+    // resets variables that dictate whether another action can be taken
     private void ClearBusy(){
         isBusy = false;
+        beenHit = false;
         isSliding = false;
         slideTimer = 0f;
     }
@@ -128,7 +136,6 @@ public class Combat_Controls : MonoBehaviour
                 animator.SetTrigger("JumpAttack");
                 playerBody.velocity = new Vector2(playerBody.velocity.x, jumpForce);
                 Invoke("AttackDamage", 0.1f);
-                // AttackDamage();
             }
             Debug.Log("Jump Attack");
             Invoke("ClearBusy", .25f);
@@ -177,7 +184,7 @@ public class Combat_Controls : MonoBehaviour
         hit = Physics2D.CircleCast(attackTransform.position, attackRange, transform.right, 0f, attackLayer);
         EnemyHealth enemyHealth = hit.collider.gameObject.GetComponent<EnemyHealth>();
         //if an enemy is found
-        if(enemyHealth != null){
+        if(enemyHealth != null && beenHit == false){
             //apply damage
             enemyHealth.Damage(attackDamage);
         }

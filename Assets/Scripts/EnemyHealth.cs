@@ -19,6 +19,7 @@ public class EnemyHealth : MonoBehaviour
     [SerializeField] private Rigidbody2D enemyBody;
     private float distance;
     private bool isBusy = false;    // whether an enemy is actively doing something (attacking), prevents spamming
+    private bool beenHit = false;     // whether the current enemy has been hit, allows attacks to be interrupted
     
     // attack and movement variables
     [SerializeField] private float speed;
@@ -76,38 +77,39 @@ public class EnemyHealth : MonoBehaviour
             if(attackChoice == 0){
                 animator.SetTrigger("Attack1");
                 Invoke("DamagePlayer", attackSpeed);
-                Invoke("ClearBusy", attackBuffer);
             }
             else if(attackChoice == 1){
                 animator.SetTrigger("Attack2");
                 Invoke("DamagePlayer", attackSpeed);
-                Invoke("ClearBusy", attackBuffer);
             }
         }
         else{
             animator.SetTrigger("Attack");
             Invoke("DamagePlayer", attackSpeed);
-            Invoke("ClearBusy", attackBuffer);
         }
     }
 
+    // function for resetting isBusy and beenHit back to false to prevent enemies from "locking up"
     private void ClearBusy(){
         isBusy = false;
+        beenHit = false;
     }
 
     private void DamagePlayer(){
         // cast attack at the Player within the attackTransform radius
         hit = Physics2D.CircleCast(attackTransform.position, attackRange, transform.right, 0f, attackLayer);
         PlayerHealth playerHealth = hit.collider.gameObject.GetComponent<PlayerHealth>();
-        if(playerHealth != null){
+        if(playerHealth != null && beenHit == false){
             playerHealth.Damage(attackDamage);
         }
+        Invoke("ClearBusy", attackBuffer);
     }
 
     public void Damage(float damageAmount){
         // take damage upon being hit by the player
         currentHealth -= damageAmount;
         animator.SetTrigger("Damage");
+        beenHit = true;
 
         // trigger knockback on hit
         if(transform.position.x < target.transform.position.x){
