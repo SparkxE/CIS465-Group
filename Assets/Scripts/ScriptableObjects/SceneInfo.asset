@@ -13,8 +13,7 @@ MonoBehaviour:
   m_Name: SceneInfo
   m_EditorClassIdentifier: 
   enemyType: BlueSlime
-  playerPosition: {x: -2.569292, y: 28.617537, z: 0}
-  lastTouched: {x: -1.4762588, y: 24.48801, z: 1}
-  isDead:
-  - {x: -1.4762588, y: 24.48801, z: 1}
+  playerPosition: {x: 22.301325, y: -28.570675, z: 0}
+  lastTouched: {x: -0.47625875, y: 21.48801, z: 1}
+  isDead: []
   icePuzzle: {fileID: 0}
