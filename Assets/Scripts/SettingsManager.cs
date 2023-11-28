@@ -5,14 +5,20 @@ using UnityEngine;
 public class SettingsManager : MonoBehaviour
 {
     [SerializeField] protected GameObject menu;
+    private CanvasGroup group;
 
+    public void Awake()
+    {
+        group = menu.GetComponent<CanvasGroup>();
+        group.alpha = 0;
+    }
     public void OpenSettings()
     {
-        menu.SetActive(true);
+        group.alpha = 1;
     }
 
     public void OnDone()
     {
-        menu.SetActive(false);
+        group.alpha = 0;
     }
 }
