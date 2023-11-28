@@ -12,8 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93ab8b60205589943809b8bed2e9677c, type: 3}
   m_Name: SceneInfo
   m_EditorClassIdentifier: 
-  enemyType: BlueSlime
-  playerPosition: {x: 22.301325, y: -28.570675, z: 0}
-  lastTouched: {x: -0.47625875, y: 21.48801, z: 1}
-  isDead: []
+  enemyType: RedSlime
+  playerPosition: {x: 2.4590557, y: -3.2666154, z: 0}
+  lastTouched: {x: 23.543743, y: -16.18199, z: 1}
+  isDead:
+  - {x: 23.543743, y: -16.18199, z: 1}
+  - {x: 23.543743, y: -16.18199, z: 1}
+  - {x: 23.543743, y: -16.18199, z: 1}
+  - {x: 23.543743, y: -16.18199, z: 1}
+  - {x: 23.543743, y: -16.18199, z: 1}
   icePuzzle: {fileID: 0}

@@ -10,6 +10,7 @@ public class Dialogue : MonoBehaviour
     [SerializeField] protected float textSpeed;
     [SerializeField] protected GameObject canvas;
     [SerializeField] protected GameObject player;
+    [SerializeField] protected bool allowCollisionTrigger = true;
     private TouchManager inputManager;
     private CanvasGroup canvasGroup;
     protected float playerSpeed;
@@ -72,8 +73,8 @@ public class Dialogue : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        // if this Object has collided with Player
-        if (other.gameObject.tag == "CollisionBox")
+        // if this Object has collided with Player AND collision trigger is enabled (it is by default)
+        if (other.gameObject.tag == "CollisionBox" && allowCollisionTrigger)
         {
             Debug.Log("trigger entered");
             // set Player speed to 0
@@ -85,6 +86,17 @@ public class Dialogue : MonoBehaviour
 
             StartDialogue();
         }
+    }
+
+    public void AlternateTrigger()
+    {
+        player.GetComponent<PlayerBehaviour>().SetSpeed(0); // freeze player
+        // set Canvas active
+        thisDialogueActive = true;
+        textComponent.text = string.Empty; // clear text, just in case
+        canvasGroup.alpha = 1; // show ui
+
+        StartDialogue();
     }
 
     private void StartDialogue()

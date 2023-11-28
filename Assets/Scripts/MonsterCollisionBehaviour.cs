@@ -7,6 +7,7 @@ public class MonsterCollisionBehaviour : MonoBehaviour
 {
     [SerializeField] private SceneInfo sceneInfo;
     [SerializeField] private string enemyName;
+    [SerializeField] protected Animator transition;
 
     private void OnEnable() {
         SceneManager.sceneLoaded += OnSceneLoaded;
@@ -34,7 +35,14 @@ public class MonsterCollisionBehaviour : MonoBehaviour
         // if this Monster has collided with Player
         if (other.gameObject.tag == "CollisionBox")
         {
-            SceneManager.LoadScene("Combat_Scene", LoadSceneMode.Single);
+            StartCoroutine(LoadLevel(1));
         }
+    }
+
+    IEnumerator LoadLevel(int levelIndex)
+    {
+        transition.SetTrigger("Start");
+        yield return new WaitForSeconds(1);
+        SceneManager.LoadScene(levelIndex);
     }
 }

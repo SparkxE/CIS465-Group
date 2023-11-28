@@ -4,24 +4,21 @@ using UnityEngine;
 
 public class AxeBehaviour : MonoBehaviour
 {
+    private bool axePickedUp;
     // Start is called before the first frame update
     void Awake()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        axePickedUp = false;
     }
 
     private void OnTriggerEnter2D (Collider2D col)
     {
-        if (col.gameObject.tag == "TriggerBox")
+        if (col.gameObject.tag == "TriggerBox" && !axePickedUp)
         {
             col.gameObject.GetComponentInParent<PlayerBehaviour>().PickupAxe();
-            Destroy(this.gameObject);
+            axePickedUp = true;
+
+            this.GetComponent<Dialogue>().AlternateTrigger();
         }
     }
 }

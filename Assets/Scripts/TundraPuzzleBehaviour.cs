@@ -46,6 +46,7 @@ public class TundraPuzzleBehaviour : MonoBehaviour
             if (firstTilemap.GetTile(tilePos) == null && secondTilemap.GetTile(tilePos) != null) // player entered tile which is already half broken
             {
                 player.GetComponent<PlayerBehaviour>().SetPosition(new Vector3(0,0,0)); // spawn player to center
+                this.GetComponent<Dialogue>().AlternateTrigger(); // trigger explanation dialogue
                 firstTilemap.SetTilesBlock(firstTilemap.cellBounds, initialTilemapData); // reset ice puzzle
                 sceneInfo.icePuzzle.SetTilesBlock(firstTilemap.cellBounds, initialTilemapData); // reset ice puzzle in sceneinfo
 

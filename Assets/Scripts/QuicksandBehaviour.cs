@@ -25,6 +25,8 @@ public class QuicksandBehaviour : MonoBehaviour
         {
             Debug.Log("quicksand encountered");
             player.GetComponent<PlayerBehaviour>().SetPosition(spawn);
+
+            this.GetComponent<Dialogue>().AlternateTrigger();
         }
     }
 }
